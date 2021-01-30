@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { Button, Form, Col } from "react-bootstrap";
+import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 
 
@@ -17,89 +18,126 @@ const WriteReview = () =>
 
       <Form>
 
+        <Form.Row className="mt-4">
+
+          <Col>
           <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+            <Form.Text className="text-white list">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Col>
+
+          <Col>
+            <Form.Control type="text" placeholder="Age" />
+          </Col>
+
+        </Form.Row>
+
+        <Form.Row className="mt-4"> 
           
-          <Form.Control type="text" placeholder="Age" />
+          <Col>
+            <Form.Control type="text" placeholder="Date of vaccine" />
+          </Col>
 
-          <Form.Control type="text" placeholder="Date of vaccine" />
+          <Col>
+            <Form.Control type="text" placeholder="Country" />
+          </Col>
 
-          <Form.Control type="text" placeholder="Country" />
+        </Form.Row>
 
-          <Form.Control type="text" placeholder="State" />
-
-          <Form.Control type="text" placeholder="City" />
-        
+        <Form.Row className="mt-4">
           
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
+          <Col>
+            <Form.Control type="text" placeholder="State" />
+          </Col>
+
+          <Col>
+            <Form.Control type="text" placeholder="City" />
+          </Col>
+
+        </Form.Row >
+
+          {/* <Form.Group controlId="formBasicCheckbox" className="mt-5">
+          <Form.Text className="formText">
             Do you have any allergies?
           </Form.Text>
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
-          </Form.Group>
+            <Form.Check type="checkbox" className="check" label="Yes" />
+            <Form.Check type="checkbox" className="check" label="No" />
+          </Form.Group> */}
 
-          <Form.Control type="text" placeholder="Allergies" />
-          <Form.Text className="text-muted">
+          {/* <Form.Control type="text" placeholder="Allergies" />
+          <Form.Text className="text-white list">
             List each with a space in between.
-          </Form.Text>
+          </Form.Text> */}
 
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-            Do you have diabetes?
-          </Form.Text>
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
-          </Form.Group>
 
-          <Form.Text>
-            Do you have AIDS?
-          </Form.Text>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
-          </Form.Group>
+          <Form.Row className="mt-4">
+          
+          <Col>
+          
+            <Form.Group controlId="formBasicCheckbox">
 
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-          Have you been to the ICU for Covid-related reasons?
-          </Form.Text>
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
-          </Form.Group>
+            <Form.Text className="formText">
+              Do you have any pre-existing conditions?
+            </Form.Text>
 
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-          Which vaccine did you undergo?
-          </Form.Text>
-            <Form.Check type="checkbox" label="Pfizer" />
-            <Form.Check type="checkbox" label="Moderna" />
-          </Form.Group>
+              <Form.Check type="radio" className="check" label="Yes" />
+              <Form.Check type="radio" className="check" label="No" />
 
-          <Form.Group controlId="formBasicCheckbox">
+            </Form.Group>
+
+          </Col>
+
+        </Form.Row>
+
+
+        <Form.Row className="mt-4">
+          
+          <Col>
+            <Form.Group controlId="formBasicCheckbox">
+            <Form.Text>
+            Have you been to the ICU for Covid-related reasons?
+            </Form.Text>
+              <Form.Check type="checkbox" className="check" label="Yes" />
+              <Form.Check type="checkbox" className="check" label="No" />
+            </Form.Group>
+          </Col>
+
+          <Col>
+            <Form.Group controlId="formBasicCheckbox">
+            <Form.Text>
+            Which vaccine did you undergo?
+            </Form.Text>
+              <Form.Check type="checkbox" className="check" label="Pfizer" />
+              <Form.Check type="checkbox" className="check" label="Moderna" />
+            </Form.Group>
+          </Col>
+
+        </Form.Row>
+
+
+          <Form.Group controlId="formBasicCheckbox" className="mt-4">
           <Form.Text>
             Check all of the reactions you may have had since your vaccination.
           </Form.Text>
-            <Form.Check type="checkbox" label="Muscle Pain" />
-            <Form.Check type="checkbox" label="Headaches" />
-            <Form.Check type="checkbox" label="Joint Pain" />
-            <Form.Check type="checkbox" label="Nausea" />
-            <Form.Check type="checkbox" label="Vomiting" />
-            <Form.Check type="checkbox" label="Fever" />
-            <Form.Check type="checkbox" label="Tiredness" />
-            <Form.Check type="checkbox" label="Other" />
+            <Form.Check type="checkbox" className="check" label="Muscle Pain" />
+            <Form.Check type="checkbox" className="check" label="Headaches" />
+            <Form.Check type="checkbox" className="check" label="Joint Pain" />
+            <Form.Check type="checkbox" className="check" label="Nausea" />
+            <Form.Check type="checkbox" className="check" label="Vomiting" />
+            <Form.Check type="checkbox" className="check" label="Fever" />
+            <Form.Check type="checkbox" className="check" label="Tiredness" />
+            <Form.Check type="checkbox" className="check" label="Other" />
 
-            <Form.Control type="text" placeholder="List any other reactions" />
+            <Form.Control className="mt-2" type="text" placeholder="List any other reactions" />
 
           </Form.Group>
 
-          <Form.Group controlId="controlTextarea">
-            <Form.Control as="textarea" rows={3} placeholder="Comments"/>
+          <Form.Group controlId="controlTextarea" className="mt-4">
+            <Form.Control as="textarea" rows={5} placeholder="Comments"/>
           </Form.Group>
 
-        <Button onClick={handleClick}>Submit Review</Button>
+        <Button className="button" onClick={handleClick}>Submit Review</Button>
       </Form>
       
 
