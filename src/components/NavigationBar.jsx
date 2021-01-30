@@ -3,16 +3,16 @@ import Logo from "../assets/logotype.png";
 import "./nav.css";
 const NavigationBar = () => {
   return (
-    <Navbar bg="primary" expand="xl">
-      <Navbar.Brand href="#home">
+    <Navbar bg="primary" expand="lg">
+      <Navbar.Brand href="/landingpage">
         <img src={Logo} alt="logo" className="logo" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ marginLeft: "auto" }}>
-          <Nav.Link href="#deets">Write a review</Nav.Link>
-          <Nav.Link href="#deets">Show Reviews</Nav.Link>
-          <Nav.Link href="#deets">FAQ</Nav.Link>
+        <Nav className="ml-auto">
+          <Nav.Link href="/writeReview">Write a review</Nav.Link>
+          <Nav.Link href="/showReviews">Show reviews</Nav.Link>
+          <Nav.Link href="/showReviews">FAQ</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
