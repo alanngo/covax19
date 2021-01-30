@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Container } from "react-bootstrap";
-import { Route, Router } from "react-router-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import LandingPage from "./pages/LandingPage";
 import Test from "./pages/Test";
