@@ -1,0 +1,9 @@
+.logo {
+    height:50%;
+    width:auto;
+    max-height: 50px;
+}
+.bg-primary {
+    background-color: #E5E5E5!important;
+    border-color: #8f8787!important;
+}
