@@ -102,6 +102,7 @@ const WriteReview = () =>
         <Button onClick={handleClick}>Submit Review</Button>
       </Form>
       
+
     </PageContainer>
 
   );
