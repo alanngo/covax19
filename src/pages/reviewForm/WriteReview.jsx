@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 import PageContainer from "../../components/layout/PageContainer";
 
 
@@ -15,115 +15,93 @@ const WriteReview = () =>
       <h1>Share your post-vaccine review with us.</h1>
       <p>Your experience with the Covid vaccine is important to us, and important to others. Let us know how you feel. We will contact you with an analysis of your results. We have you covered!</p>
 
-      <form>
-          Email:
-          <input type="text"></input>
+      <Form>
 
-          <br />
-
-          Age:
-          <input type="text"></input>
-
-          <br />
+          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
           
-          Date of Vaccine:
-          <input type="text"></input>
+          <Form.Control type="text" placeholder="Age" />
 
-          <br />
+          <Form.Control type="text" placeholder="Date of vaccine" />
 
-          Country:
-          <input type="text"></input>
+          <Form.Control type="text" placeholder="Country" />
 
-          <br />
+          <Form.Control type="text" placeholder="State" />
 
-          State:
-          <input type="text"></input>
-
-          <br />
+          <Form.Control type="text" placeholder="City" />
+        
           
-          City:
-          <input type="text"></input>
+          <Form.Group controlId="formBasicCheckbox">
+          <Form.Text>
+            Do you have any allergies?
+          </Form.Text>
+            <Form.Check type="checkbox" label="Yes" />
+            <Form.Check type="checkbox" label="No" />
+          </Form.Group>
 
-          <br />
+          <Form.Control type="text" placeholder="Allergies" />
+          <Form.Text className="text-muted">
+            List each with a space in between.
+          </Form.Text>
 
-          Do you have any allergies?
-          <input type="radio" />
-          <label>Yes</label>
-          <input type="radio" />
-          <label>No</label>
+          <Form.Group controlId="formBasicCheckbox">
+          <Form.Text>
+            Do you have diabetes?
+          </Form.Text>
+            <Form.Check type="checkbox" label="Yes" />
+            <Form.Check type="checkbox" label="No" />
+          </Form.Group>
 
-          <br />
+          <Form.Text>
+            Do you have AIDS?
+          </Form.Text>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Yes" />
+            <Form.Check type="checkbox" label="No" />
+          </Form.Group>
 
-          List your allergies:
-          <input type="text"></input>
-          <p>List each with a space in between</p>
-
-          <br />
-
-          Do you have diabetes?
-          <input type="radio" />
-          <label>Yes</label>
-          <input type="radio" />
-          <label>No</label>
-
-          <br />
-
-          Do you have AIDS?
-          <input type="radio" />
-          <label>Yes</label>
-          <input type="radio" />
-          <label>No</label>
-
-          <br />
-
+          <Form.Group controlId="formBasicCheckbox">
+          <Form.Text>
           Have you been to the ICU for Covid-related reasons?
-          <input type="radio" />
-          <label>Yes</label>
-          <input type="radio" />
-          <label>No</label>
+          </Form.Text>
+            <Form.Check type="checkbox" label="Yes" />
+            <Form.Check type="checkbox" label="No" />
+          </Form.Group>
 
-          <br />
-
+          <Form.Group controlId="formBasicCheckbox">
+          <Form.Text>
           Which vaccine did you undergo?
-          <input type="radio" />
-          <label>Pfizer</label>
-          <input type="radio" />
-          <label>Moderna</label>
+          </Form.Text>
+            <Form.Check type="checkbox" label="Pfizer" />
+            <Form.Check type="checkbox" label="Moderna" />
+          </Form.Group>
 
-          <br />
+          <Form.Group controlId="formBasicCheckbox">
+          <Form.Text>
+            Check all of the reactions you may have had since your vaccination.
+          </Form.Text>
+            <Form.Check type="checkbox" label="Muscle Pain" />
+            <Form.Check type="checkbox" label="Headaches" />
+            <Form.Check type="checkbox" label="Joint Pain" />
+            <Form.Check type="checkbox" label="Nausea" />
+            <Form.Check type="checkbox" label="Vomiting" />
+            <Form.Check type="checkbox" label="Fever" />
+            <Form.Check type="checkbox" label="Tiredness" />
+            <Form.Check type="checkbox" label="Other" />
 
-          Check all of the reactions you may have had since your vaccination.
-          <input type="radio" />
-          <label>Muscle Pain</label>
-          <input type="radio" />
-          <label>Headaches</label>
-          <input type="radio" />
-          <label>Joint Pain</label>
-          <input type="radio" />
-          <label>Nausea</label>
-          <input type="radio" />
-          <label>Vomiting</label>
-          <input type="radio" />
-          <label>Fever</label>
-          <input type="radio" />
-          <label>Tiredness</label>
-          <input type="radio" />
-          <label>Other</label>
+            <Form.Control type="text" placeholder="List any other reactions" />
 
-          <br />
+          </Form.Group>
 
-          List any other reactions:
-          <input type="text"></input>
+          <Form.Group controlId="controlTextarea">
+            <Form.Control as="textarea" rows={3} placeholder="Comments"/>
+          </Form.Group>
 
-          <br />
-
-          Comments:
-          <textarea type="text"></textarea>
-
-          <br />
-
-      <Button onClick={handleClick}>Submit Review</Button>
-      </form>
+        <Button onClick={handleClick}>Submit Review</Button>
+      </Form>
+      
 
     </PageContainer>
 
