@@ -117,7 +117,12 @@ const WriteReview = () =>
 
 
         <Form.Group controlId="formBasicCheckbox" className="mt-4">
-            <Form.Control type="textbox" placeholder="List any reactions you had after taking the vaccine" />
+            <Form.Control type="textbox" placeholder="List any reactions you had after taking the vaccine" 
+             onChange = {(e)=>
+              {
+                let words = e.target.value.split(', ')
+                changeValue('reactions', words)
+              }}/>
               <Form.Text className="text-white list">
                 List your reactions with commas as separators.
               </Form.Text>
