@@ -48,7 +48,7 @@ const WriteReview = () =>
         <Form.Row className="mt-4">
           
           <Col>
-            <Form.Control type="text" placeholder="State" />
+            <Form.Control type="text" placeholder="State/Region/Province" />
           </Col>
 
           <Col>
@@ -74,22 +74,29 @@ const WriteReview = () =>
           <Form.Row className="mt-4">
           
           <Col>
-          
-            <Form.Group controlId="formBasicCheckbox">
 
-            <Form.Text className="formText">
-              Do you have any pre-existing conditions?
-            </Form.Text>
+            <Form.Group controlId="controlSelect">
+              <Form.Text>Do you have any pre-existing conditions?</Form.Text>
 
-              <Form.Check type="radio" className="check" label="Yes" />
-              <Form.Check type="radio" className="check" label="No" />
+              <Form.Check type="checkbox" className="check" label="Cancer" />
+              <Form.Check type="checkbox" className="check" label="Chronic Kidney Disease" />
+              <Form.Check type="checkbox" className="check" label="COPD (chronic obstructive pulmonary disease)" />
+              <Form.Check type="checkbox" className="check" label="Down Syndrome" />
+              <Form.Check type="checkbox" className="check" label="Heart conditions, such as heart failure, coronary artery disease, or cardiomyopathies" />
+              <Form.Check type="checkbox" className="check" label="Immunocompromised State (weakened immune system) from solid organ transplant" />
+              <Form.Check type="checkbox" className="check" label="Obesity (body mass index [BMI] of 30 kg/m2 or higher but < 40 kg/m2)" />
+              <Form.Check type="checkbox" className="check" label="Severe Obesity (BMI ≥ 40 kg/m2)" />
+              <Form.Check type="checkbox" className="check" label="Pregnancy" />
+              <Form.Check type="checkbox" className="check" label="Sickle Cell Disease" />
+              <Form.Check type="checkbox" className="check" label="Smoking" />
+              <Form.Check type="checkbox" className="check" label="Type 2 Diabetes Mellitus" />
+              <Form.Check type="checkbox" className="check" label="Allergies" />
 
             </Form.Group>
 
           </Col>
 
         </Form.Row>
-
 
         <Form.Row className="mt-4">
           
@@ -98,8 +105,10 @@ const WriteReview = () =>
             <Form.Text>
             Have you been to the ICU for Covid-related reasons?
             </Form.Text>
-              <Form.Check type="checkbox" className="check" label="Yes" />
-              <Form.Check type="checkbox" className="check" label="No" />
+
+              <Form.Check type="radio" className="check" name="condition" label="Yes"/>
+              <Form.Check type="radio" className="check" name="condition" label="No"/>
+
             </Form.Group>
           </Col>
 
@@ -108,8 +117,18 @@ const WriteReview = () =>
             <Form.Text>
             Which vaccine did you undergo?
             </Form.Text>
-              <Form.Check type="checkbox" className="check" label="Pfizer" />
-              <Form.Check type="checkbox" className="check" label="Moderna" />
+
+            <Form.Control as="select">
+              <option>Pfizer</option>
+              <option>Moderna</option>
+              <option>Johnson &amp; Johnson</option>
+              <option>Covishield</option>
+              <option>Covaxin</option>
+              <option>Sinovac</option>
+              <option>Sputnik V</option>
+            </Form.Control>
+
+            <br />
             </Form.Group>
           </Col>
 
