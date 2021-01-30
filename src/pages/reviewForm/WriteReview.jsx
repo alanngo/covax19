@@ -10,11 +10,18 @@ const WriteReview = () =>
       // implement logic here
   }
 
+import PageContainer from "../../components/layout/PageContainer";
+
+const WriteReview = () => {
+
   return (
-    <Fragment>
+    <PageContainer>
       <h2>Write a review</h2>
+
       <Button onClick={handleClick}>Submit Review</Button>
     </Fragment>
+    </PageContainer>
+
   );
 };
 
