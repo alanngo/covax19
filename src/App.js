@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { Container } from "react-bootstrap";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import Faq from "./pages/Faq";
