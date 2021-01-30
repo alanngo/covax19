@@ -1,11 +1,10 @@
-import { Fragment } from "react";
+import PageContainer from "../../components/layout/PageContainer";
 
-const WriteReview = () => 
-{
+const WriteReview = () => {
   return (
-    <Fragment>
+    <PageContainer>
       <h2>Write a review</h2>
-    </Fragment>
+    </PageContainer>
   );
 };
 
