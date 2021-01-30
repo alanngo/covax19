@@ -1,9 +1,15 @@
 .logo {
-    height:50%;
-    width:auto;
-    max-height: 50px;
+    height: 80%;
+    width: auto;
+    max-height: 60px;
+    padding-left: 1em;
 }
 .bg-primary {
     background-color: #E5E5E5!important;
     border-color: #8f8787!important;
+}
+
+.ml-auto{
+    font-family: Josefin Sans;
+    padding-right: 20px;
 }

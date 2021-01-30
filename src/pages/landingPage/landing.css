@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@800&display=swap');
+
+
 .landing--panels{
     flex:1 0 ;
-    display: flex;
     width:100%;
     height:100%;
 }
@@ -9,14 +11,62 @@
     width:100%;
     flex: 1;
     display:flex;
-
 }
 
 .panel-green{
-    background-color: #4A5E49;
-    
+    background-color: #FFF8EF;
+    background-image: url(../../assets/molecules.png);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .panel-yeet{
     background-color: white;
+    padding: 4em 4em 0em 4em;
+}
+
+h1{
+    font-family: 'Vollkorn', serif;
+    font-size: 50px;
+    font-weight: 800;
+    color: #B15239;
+}
+
+p{
+    font-family: 'Josefin Sans', serif;
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+button{
+    display: block;
+    margin-top: 1em;
+    color: #F2F3F4;
+    font-family: Josefin Sans;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    padding: 10px 60px 10px 60px;
+    border-radius: 30px;
+}
+
+button:hover{
+    background-color: black;
+    transition: 0.3s;
+}
+
+.buttonGroup{
+    padding-top: 1em;
+}
+
+.writeButton{
+    background-color: #345276;
+}
+
+.browseButton{
+    background-color: #A37846;
+}
+
+.faqButton{
+    background-color: #4A5E49;
 }
