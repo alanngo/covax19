@@ -1,15 +1,15 @@
 import { Fragment } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import NavigationBar from "./components/NavigationBar";
-import Faq from "./pages/Faq";
-import LandingPage from "./pages/LandingPage";
+import NavigationBar from "./components/navbar/NavigationBar";
+import Faq from "./pages/faq/Faq";
+import LandingPage from "./pages/landingPage/LandingPage";
 import Test from "./pages/Test";
-import WriteReview from "./pages/WriteReview";
-import ShowReviews from "./pages/ShowReviews";
+import WriteReview from "./pages/reviewForm/WriteReview";
+import ShowReviews from "./pages/reviews/ShowReviews";
 const App = () => (
   <Fragment>
     <Router>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Switch>
         <Route path="/test">
           <Test />

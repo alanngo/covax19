@@ -1,6 +1,6 @@
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Logo from "../assets/logotype.png";
+import Logo from "../../assets/logotype.png";
 import "./nav.css";
 const NavigationBar = () => {
   return (
