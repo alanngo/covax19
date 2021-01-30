@@ -1,9 +1,10 @@
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logotype.png";
+
+import Logo from "../../assets/covax-needle.png";
 import "./nav.css";
-const NavigationBar = () => {
-  return (
+const NavigationBar = () => 
+(
     <Navbar bg="primary" expand="lg">
       <Navbar.Brand as={Link} to="/">
         <img src={Logo} alt="logo" className="logo" />
@@ -24,5 +25,5 @@ const NavigationBar = () => {
       </Navbar.Collapse>
     </Navbar>
   );
-};
+
 export default NavigationBar;
