@@ -1,10 +1,16 @@
 import PageContainer from "../../components/layout/PageContainer";
+import "./faqs.css";
+
 
 const Faq = () => {
   return (
+   
     <PageContainer>
+      <div className="faqcontainer">
 
-      <h1>FAQ</h1>
+      
+
+      <h1>Frequently Asked Questions</h1>
       <ol>
       <li>Is the COVID-19 vaccine safe given that it was rapidly developed and tested? </li>
       <li>Is it true that the flu vaccine already helps protect me from COVID-19?</li>
@@ -17,7 +23,11 @@ const Faq = () => {
       <li>Is it true that COVID-19 vaccine was developed to control the general population either through microchip tracking or “nanotransducers” in our brain?</li>
       <li>Is it true that COVID-19 vaccine was developed using fetal tissue?</li>
       </ol>
+
+      </div>
     </PageContainer>
+
+   
 
   );
 };
