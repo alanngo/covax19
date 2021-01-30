@@ -1,30 +1,23 @@
-
 import axios from "axios";
-import { Fragment, useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import PageContainer from "../../components/layout/PageContainer";
 
-const ShowReviews = () => 
-{
-  let [patients, setPatients] = useState([])
-  useEffect(() => 
-  {
-    let url ="https://covax19.herokuapp.com/"
-    axios.get(url)
-    .then(res => 
-    {
-      setPatients(res.data)
-      console.log(patients)
-    })
+const ShowReviews = () => {
+  const [patients, setPatients] = useState([]);
+  useEffect(() => {
+    const url = "https://covax19.herokuapp.com/";
+    axios.get(url).then((res) => {
+      setPatients(res.data);
+      console.log(patients);
+    });
   });
   return (
-    <Fragment>
+    <PageContainer>
       <h2>Show reviews</h2>
-      {
-      patients.map(elem =>
-      (
-        <h2>{elem._id}</h2>
-      ))
-      }
-    </Fragment>
+      {patients.map((elem) => (
+        <h2 key={elem.id}>{elem._id}</h2>
+      ))}
+    </PageContainer>
   );
 };
 
