@@ -11,25 +11,23 @@ const App = () => (
   <Fragment>
     <Router>
       <NavigationBar />
-      <Container>
-        <Switch>
-          <Route path="/test">
-            <Test />
-          </Route>
-          <Route path="/faq">
-            <Faq />
-          </Route>
-          <Route path="/writeReview">
-            <WriteReview />
-          </Route>
-          <Route path="/showReviews">
-            <ShowReviews />
-          </Route>
-          <Route path="/">
-            <LandingPage />
-          </Route>
-        </Switch>
-      </Container>
+      <Switch>
+        <Route path="/test">
+          <Test />
+        </Route>
+        <Route path="/faq">
+          <Faq />
+        </Route>
+        <Route path="/writeReview">
+          <WriteReview />
+        </Route>
+        <Route path="/showReviews">
+          <ShowReviews />
+        </Route>
+        <Route path="/">
+          <LandingPage />
+        </Route>
+      </Switch>
     </Router>
   </Fragment>
 );
