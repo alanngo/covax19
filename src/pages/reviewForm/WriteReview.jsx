@@ -91,8 +91,6 @@ const WriteReview = () =>
         </Form.Row>
 
         <Form.Row>
-        
-
 
             <Form.Group controlId="formBasicCheckbox">
             <Form.Text>
