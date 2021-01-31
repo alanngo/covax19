@@ -1,105 +1,152 @@
 import { Fragment, useState, useEffect } from "react";
 import { Button, Form, Col } from "react-bootstrap";
+import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 
 
 const WriteReview = () => 
 {
-  let [review, setReview] = useState(0)
+  let [review, setReview] = useState({})
   const handleClick = (e) => 
   {
+    e.preventDefault()
       // implement logic here
+      console.log(review)
   }
+  const changeValue = (key, value)=> setReview({ ...review, [`${key}`]: value})
+
   return (
     <PageContainer>
       <h1>Share your post-vaccine review with us.</h1>
       <p>Your experience with the Covid vaccine is important to us, and important to others. Let us know how you feel. We will contact you with an analysis of your results. We have you covered!</p>
 
-      <Form>
+      <Form onSubmit={handleClick}>
 
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+        <Form.Row className="mt-4">
+
+          <Col>
+          <Form.Control type="email" placeholder="Enter email" 
+          onChange={(e) => changeValue('_id', e.target.value)}/>
+            <Form.Text className="text-white list">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Col>
+
+          <Col>
+            <Form.Control type="text" placeholder="Age" 
+             onChange={(e) => changeValue('age', e.target.value)}/>
+          </Col>
+
+        </Form.Row>
+
+        <Form.Row className="mt-4"> 
           
-          <Form.Control type="text" placeholder="Age" />
+          <Col>
+            <Form.Control type="text" placeholder="Date of vaccine" 
+             onChange={(e) => changeValue('date', e.target.value)}/>
+          </Col>
 
-          <Form.Control type="text" placeholder="Date of vaccine" />
+          <Col>
+            <Form.Control type="text" placeholder="Country" 
+             onChange={(e) => changeValue('country', e.target.value)}/>
+          </Col>
 
-          <Form.Control type="text" placeholder="Country" />
+        </Form.Row>
 
-          <Form.Control type="text" placeholder="State" />
+        <Form.Row className="mt-4">
+          
+          <Col>
+            <Form.Control type="text" placeholder="State/Region/Province" 
+             onChange={(e) => changeValue('region', e.target.value)}/>
+          </Col>
 
-          <Form.Control type="text" placeholder="City" />
+          <Col>
+            <Form.Control type="text" placeholder="City" 
+             onChange={(e) => changeValue('city', e.target.value)}/>
+          </Col>
+
+        </Form.Row >
+
+
+          <Form.Row className="mt-4">
+          
+          <Col>
+
+          <Form.Group controlId="controlSelect">
+
+            <Form.Control type="textbox" placeholder="Do you have any pre-existing conditions?" 
+            onChange = {(e)=>
+            {
+              let words = e.target.value.split(', ')
+              changeValue('conditions', words)
+            }}/>
+            <Form.Text className="text-white list">
+              List your pre-existing conditions with commas as separators.
+            </Form.Text>
+
+            </Form.Group>
+
+          </Col>
+
+        </Form.Row>
+
+        <Form.Row>
         
-          
+
+
+            <Form.Group controlId="formBasicCheckbox">
+            <Form.Text>
+            Which vaccine did you undergo?
+            </Form.Text>
+
+            <Form.Control as="select" 
+            onChange={(e) => changeValue('company', e.target.value)}>
+              <option>Pfizer</option>
+              <option>Moderna</option>
+              <option>Johnson &amp; Johnson</option>
+              <option>Covishield</option>
+              <option>Covaxin</option>
+              <option>Sinovac</option>
+              <option>Sputnik V</option>
+            </Form.Control>
+
+            <br />
+            </Form.Group>
+
+        </Form.Row>
+
+
+        <Form.Group controlId="formBasicCheckbox" className="mt-4">
+            <Form.Control type="textbox" placeholder="List any reactions you had after taking the vaccine" 
+             onChange = {(e)=>
+              {
+                let words = e.target.value.split(', ')
+                changeValue('reactions', words)
+              }}/>
+              <Form.Text className="text-white list">
+                List your reactions with commas as separators.
+              </Form.Text>
+
+          </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-            Do you have any allergies?
-          </Form.Text>
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
+            <Form.Text>
+            Have you been to the ICU for Covid-related reasons?
+            </Form.Text>
+
+              <Form.Check type="radio" className="check" name="condition" label="Yes"
+               onChange={() => changeValue('icu', 'yes')}/>
+              <Form.Check type="radio" className="check" name="condition" label="No"
+              onChange={() => changeValue('icu', 'no')}/>
+
+            </Form.Group>
+
+          <Form.Group controlId="controlTextarea" className="mt-4"
+          >
+            <Form.Control as="textarea" rows={5} placeholder="Comments"
+            onChange={(e) => changeValue('comments', e.target.value)}/>
           </Form.Group>
 
-          <Form.Control type="text" placeholder="Allergies" />
-          <Form.Text className="text-muted">
-            List each with a space in between.
-          </Form.Text>
-
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-            Do you have diabetes?
-          </Form.Text>
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
-          </Form.Group>
-
-          <Form.Text>
-            Do you have AIDS?
-          </Form.Text>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-          Have you been to the ICU for Covid-related reasons?
-          </Form.Text>
-            <Form.Check type="checkbox" label="Yes" />
-            <Form.Check type="checkbox" label="No" />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-          Which vaccine did you undergo?
-          </Form.Text>
-            <Form.Check type="checkbox" label="Pfizer" />
-            <Form.Check type="checkbox" label="Moderna" />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-            Check all of the reactions you may have had since your vaccination.
-          </Form.Text>
-            <Form.Check type="checkbox" label="Muscle Pain" />
-            <Form.Check type="checkbox" label="Headaches" />
-            <Form.Check type="checkbox" label="Joint Pain" />
-            <Form.Check type="checkbox" label="Nausea" />
-            <Form.Check type="checkbox" label="Vomiting" />
-            <Form.Check type="checkbox" label="Fever" />
-            <Form.Check type="checkbox" label="Tiredness" />
-            <Form.Check type="checkbox" label="Other" />
-
-            <Form.Control type="text" placeholder="List any other reactions" />
-
-          </Form.Group>
-
-          <Form.Group controlId="controlTextarea">
-            <Form.Control as="textarea" rows={3} placeholder="Comments"/>
-          </Form.Group>
-
-        <Button onClick={handleClick}>Submit Review</Button>
+        <Button className="button" onClick={handleClick}>Submit Review</Button>
       </Form>
       
 

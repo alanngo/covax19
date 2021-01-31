@@ -1,19 +1,18 @@
 .faqcontainer {  
     margin-top: 20px;
-
+    padding-bottom: 4em;
 }
 
 .faqcontainer h1 {
-    color: 
-     #4A5E49;
-    
+    margin-top: 2em;
+    font-family: 'Vollkorn', serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: #4A5E49;
 }
 
 .faqcontainer li {
-    
     font-family: 'Josefin Sans', serif;
-
      margin-bottom: 20px;
-    
 }
 
