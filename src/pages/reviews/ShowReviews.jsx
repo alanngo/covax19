@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import "./showreviews.css";
 import Covexlogo from "../../assets/covex_logo.png";
 import PageContainer from "../../components/layout/PageContainer";
@@ -47,8 +47,8 @@ const ReviewFormCard = ({ data }) => (
           <li>{data.date}</li>
           <li>{data.location ? data.location.city : ""}</li>
           <li>{data.age} years old</li>
-          <li>Preexisting Conditions: {(data.conditions? data.conditions.map(e =>e+" "):"")}</li>
-          <li>Symptoms: {(data.conditions? data.reactions.map(e =>e+" "):"")}</li>
+          <li>Preexisting Conditions: {(data.conditions? data.conditions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
+          <li>Symptoms: {(data.reactions? data.reactions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
         </ul>
       </Col>
 
@@ -57,38 +57,13 @@ const ReviewFormCard = ({ data }) => (
           {data.comments}
         </p>
       </Col>
+      <Col>
+        <p className="location">
+        {data.city} {data.region} {data.country}
+        </p>
+      </Col>
     </Row>
   </Container>
 );
 
-// const ReviewFormCard = ({ data }) => (
-//   <Container className="reviewContent">
-//     <Row>
-//       <Col xs={2}>
-//         <img className="logotype" src={Covexlogo} alt="Covax-19 Logo" />
-//       </Col>
 
-//       <Col className="details" xs={3}>
-//         <ul>
-//           <li>Moderna</li>
-//           <li>January 10, 2020</li>
-//           <li>San Francisco, USA</li>
-//           <li>43 years old</li>
-//           <li>Diabetes, ICU visit</li>
-//           <li>Symptoms: Headaches, Fever, Muscle Pain</li>
-//         </ul>
-//       </Col>
-
-//       <Col>
-//         <p className="comment">
-//           “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-//           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-//           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-//           aliquip ex ea commodo consequat. Duis aute irure dolor in
-//           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-//           pariatur!”
-//         </p>
-//       </Col>
-//     </Row>
-//   </Container>
-// );

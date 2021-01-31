@@ -21,7 +21,11 @@ const NavigationBar = () =>
         <Nav.Link as={Link} to="/faq">
           FAQ
           </Nav.Link>
+          <Nav.Link as={Link} to="/about">
+          About
+          </Nav.Link>
       </Nav>
+      
     </Navbar.Collapse>
   </Navbar>
 );

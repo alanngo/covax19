@@ -46,3 +46,11 @@ p{
     padding: 0.5em;
     margin-top: 2em;
 }
+
+.location
+{
+    padding-top: 30px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 100;
+}
