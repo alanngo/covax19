@@ -5,9 +5,10 @@ import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
 
 const WriteReview = () => {
-  const [review, setReview] = useState({});
+  const [review, setReview] = useState({ company: "Pfizer" });
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const url = "https://covax19.herokuapp.com/";
     axios.post(url, review).then((res) => {
       const result = res.data;
@@ -110,8 +111,8 @@ const WriteReview = () => {
 
             <Form.Control
               as="select"
-              onDefault
               onChange={(e) => changeValue("company", e.target.value)}
+              defaultValue="Pfizer"
             >
               <option>Pfizer</option>
               <option>Moderna</option>
