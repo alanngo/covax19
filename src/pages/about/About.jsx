@@ -3,6 +3,9 @@ import Tanya from "../../assets/tanya.jpg"
 import Hanniya from "../../assets/haaniya.jpg"
 import Alan from "../../assets/alan.jpg"
 import Nathan from "../../assets/nathan.png"
+import Olga from "../../assets/olga.jpg"
+
+import "./about.css";
 import { CardDeck, Card, Image, Accordion, Button } from "react-bootstrap";
 const data = 
 [
@@ -12,7 +15,7 @@ const data =
         bio:"I am a University of Texas at Austin alumnus working at Infosys with experience in Java, Python, and C++ to name a few. I highly believe in learning new things and solving problems to enrich one's mind and then sharing it with other people so that they can share in the intellectual endavour. Aside from learning new things, I also dedicate time for different hobbies that I love such a hanging out, hiking, rock climbing, building PCs, playing games and coding for fun. ", 
         linkedin:"https://www.linkedin.com/in/alan-ngo-77338a150/", 
         github:"https://github.com/alanngo",
-        roles: "fullstack developer"
+        roles: "Fullstack Developer"
     },
     {
         name: "Nathan Suarez", 
@@ -20,7 +23,7 @@ const data =
         bio:"Graduated from California State University Los Angeles - Bachelors degree in Computer Science. For me, problem solving and taking on challenges is the spice of life.  My passion is being able to utilize my software engineering skills to help others by improving & creating new tools and it is also extremely rewarding to me.", 
         linkedin:"https://www.linkedin.com/in/nsuarez22", 
         github:"https://github.com/redxzeta",
-        roles: "fullstack developer"
+        roles: "Fullstack Developer"
     },
         
     {
@@ -29,7 +32,7 @@ const data =
         bio:"A final year mechanical engineering student at IIT Bombay, India. I’m working on using Image Morphing for optimising the Die Forging process. A self-taught UI/UX designer, I'm currently learning Android App development by participating in hackathons. I love meeting new people, brainstorming ideas and collaborating with them through different projects. You can find me on the basketball court or playing chess in my free time.", 
         linkedin:" https://www.linkedin.com/in/tanyagupta10/", 
         github:"https://github.com/Tannybuoy",
-        roles: "UX/UI designer"
+        roles: "UI designer"
     },
     {
         name: "Hanniya Zohdi", 
@@ -41,7 +44,7 @@ const data =
     },
     {
         name: "Olga Shevchuk", 
-        img: "", bio:"", 
+        img: Olga, bio:"I'm a junior Computer Science and Math double major at Bryn Mawr College. I am passionate about using my coding skills to benefit the society. I also have interests in cybersecurity, data science and app development. This hackathon was a great chance for me to learn web development. In particular, I researched information for the website and contributed to website implementation using JSX and CSS.", 
         linkedin:"https://www.linkedin.com/in/olgashevchuk/", 
         github:"https://github.com/oshevchuk27",
         roles: "UX/UI designer"
@@ -50,10 +53,13 @@ const data =
 const About = () =>
 (
     <>
+
     <PageContainer>
-        
-        
+        <h2 className="teamTitle">Meet team behind Covax-19</h2>
     </PageContainer>
+
+    <div className="whitespace">
+
     <CardDeck>
     {
         data.map(elem=>
@@ -62,23 +68,21 @@ const About = () =>
             
             <Card.Img variant="top" src={elem.img} rounded  />
             <Card.Body>
-                <Card.Title>{elem.name}</Card.Title>
-                <Card.Text>{elem.bio} </Card.Text>
-                <Button href={elem.github} variant="dark">Github</Button>
-                <Button href={elem.linkedin} variant="primary">Linkedin</Button>
+                <Card.Title className="name">{elem.name}</Card.Title>
+                <Card.Text className="bio">{elem.bio} </Card.Text>
+                <Button href={elem.github} className="gitbutton">Github</Button>
+                <Button href={elem.linkedin} className="linkedin">Linkedin</Button>
             </Card.Body>
-            <Card.Footer>
+            <Card.Footer className="role">
                {elem.roles}
             </Card.Footer>
             </Card>
         ))
     }
     </CardDeck>
-    
-
-    <div>
 
     </div>
+
     </>
 )
 

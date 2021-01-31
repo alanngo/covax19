@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
-h2{
-    margin-top: 1em;
+
+h1{
+    margin-top: 2em;
     font-family: 'Vollkorn', serif;
     font-size: 40px;
     font-weight: 800;
-    color: #A37846;
+    color:  #A37846;
 }
+
 
 ul{
     list-style: none;

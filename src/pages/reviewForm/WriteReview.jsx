@@ -22,7 +22,7 @@ const WriteReview = () => {
 
   return (
     <PageContainer>
-      <h1>Share your post-vaccine review with us.</h1>
+      <h1 className="reviewTitle">Share your post-vaccine review with us.</h1>
       <p>
         Your experience with the Covid vaccine is important to us, and important
         to others. Let us know how you feel. We will contact you with an

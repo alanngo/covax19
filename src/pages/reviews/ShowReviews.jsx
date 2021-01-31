@@ -17,7 +17,7 @@ const ShowReviews = () => {
 
   return (
     <PageContainer>
-      <h2>Read how other people are feeling.</h2>
+      <h1>Read how other people are feeling.</h1>
       <p>
         Headache? Sore body? You may be feeling anxious about your post-vaccine
         symptoms, but you are not alone!

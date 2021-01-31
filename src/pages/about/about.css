@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+
+.teamTitle{
+    margin: 2em 0em 1em 0em;
+    font-family: 'Vollkorn', serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: #B15239;
+}
+
+.whitespace{
+    padding: 0.5em 3em 2em 3em;
+}
+
+.name{
+    font-family: 'Vollkorn', serif;
+    color:#B15239;
+    text-align: center;
+    font-size: 18px;
+}
+
+p{
+    font-family: 'Josefin Sans', serif;
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+.bio{
+    font-family: 'Josefin Sans', serif;
+    font-size: 16px;
+    padding-top: 15px;
+}
+
+.gitbutton{
+    margin-top: 1em;
+    display: block;
+    background-color: #345276;
+    color: #F2F3F4;
+    font-family: Josefin Sans;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+}
+
+.linkedin{
+    margin-top: 1em;
+    display: block;
+    background-color: #A37846;
+    color: #F2F3F4;
+    font-family: Josefin Sans;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+}
+
+.linkedin:hover, .gitbutton:hover{
+    background-color: black;
+    transition: 0.3s;
+}
+
+.role{
+    background-color: #FFF8EF;
+    font-family: 'Vollkorn', serif;
+    font-weight: 300;
+    text-align: center;
+    font-size: 18px;
+}
