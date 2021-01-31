@@ -2,6 +2,10 @@
 
 ![mockup](https://github.com/Tannybuoy/covreact-frontend/blob/main/src/assets/mockup.png)
 
+### Links 
+
+[Devpost](https://devpost.com/software/covax-19) [Website](https://covax19.netlify.app/) [Demo](https://vimeo.com/506698426)
+
 ## Inspiration
 Vaccine roll-outs for COVID-19 have begun but there is a lot of apprehension in the minds of people, some myths around vaccination as well as general curiosity about the best vaccine for yourself and your family. Through the rumors and false information spreading around the media, many are anxious and worried about what is being injected into their bodies, even though it may be for the best. **Covax-19** makes it easier to track your own health post-vaccine. 
 
