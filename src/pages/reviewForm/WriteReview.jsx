@@ -114,7 +114,7 @@ const WriteReview = () =>
         </Form.Row>
 
 
-        <Form.Group controlId="formBasicCheckbox" className="mt-4">
+        <Form.Group controlId="formBasicCheckbox">
             <Form.Control type="textbox" placeholder="List any reactions you had after taking the vaccine" 
              onChange = {(e)=>
               {
