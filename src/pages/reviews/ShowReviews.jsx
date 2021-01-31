@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import "./showreviews.css";
 import Covexlogo from "../../assets/covex_logo.png";
 import PageContainer from "../../components/layout/PageContainer";

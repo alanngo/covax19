@@ -6,7 +6,7 @@ import Nathan from "../../assets/nathan.png"
 import Olga from "../../assets/olga.jpg"
 
 import "./about.css";
-import { CardDeck, Card, Image, Accordion, Button } from "react-bootstrap";
+import { CardDeck, Card, Button } from "react-bootstrap";
 const data = 
 [
     {

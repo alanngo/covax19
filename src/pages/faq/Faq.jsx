@@ -1,6 +1,5 @@
 import PageContainer from "../../components/layout/PageContainer";
 import "./faqs.css";
-import{ Link, NavLink } from "react-router-dom"
 
 
 const Faq = () => {
