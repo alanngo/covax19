@@ -4,19 +4,29 @@ import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
 
-const WriteReview = () => {
-  const [review, setReview] = useState({ company: "Pfizer" });
-  const handleSubmit = (e) => {
+const WriteReview = () => 
+{
+  const [review, setReview] = useState({ company: "Pfizer" , "date":new Date().toISOString().substring(0, 10)});
+  const handleSubmit = (e) => 
+  {
     e.preventDefault();
-
-    const url = "https://covax19.herokuapp.com/";
-    axios.post(url, review).then((res) => {
+    console.log(review)
+    if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
+    else
+    {
+      const url = "https://covax19.herokuapp.com/";
+      axios.post(url, review).then((res) => {
       const result = res.data;
       if (result.hasOwnProperty("err")) alert(result.err);
       else alert("Successfully added review");
       console.log(result);
     });
+    }
+    
   };
+
+  const inFuture = (date) => date.setHours(0,0,0,0) > new Date().setHours(0,0,0,0)
+
   const changeValue = (key, value) =>
     setReview({ ...review, [`${key}`]: value });
 
@@ -44,20 +54,25 @@ const WriteReview = () => {
 
           <Col>
             <Form.Control
-              type="text"
+              type="number"
               placeholder="Age"
-              onChange={(e) => changeValue("age", e.target.value)}
+              min={0}
+              onChange={(e) => changeValue("age", e.target.value) }
             />
+            <Form.Text className="text-white list">
+              Age
+            </Form.Text>
           </Col>
         </Form.Row>
 
         <Form.Row className="mt-4">
           <Col>
             <Form.Control
-              type="text"
+              type="date"
               placeholder="Date of vaccine"
               onChange={(e) => changeValue("date", e.target.value)}
             />
+            <Form.Text>Date vaccine taken</Form.Text>
           </Col>
 
           <Col>
@@ -66,6 +81,9 @@ const WriteReview = () => {
               placeholder="Country"
               onChange={(e) => changeValue("country", e.target.value)}
             />
+            <Form.Text className="text-white list">
+              Country
+            </Form.Text>
           </Col>
         </Form.Row>
 
@@ -76,6 +94,9 @@ const WriteReview = () => {
               placeholder="State/Region/Province"
               onChange={(e) => changeValue("region", e.target.value)}
             />
+            <Form.Text className="text-white list">
+              Region
+            </Form.Text>
           </Col>
 
           <Col>
@@ -84,6 +105,9 @@ const WriteReview = () => {
               placeholder="City"
               onChange={(e) => changeValue("city", e.target.value)}
             />
+              <Form.Text className="text-white list">
+              City
+            </Form.Text>
           </Col>
         </Form.Row>
 

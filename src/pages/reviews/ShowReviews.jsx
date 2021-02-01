@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import "./showreviews.css";
 import Covexlogo from "../../assets/covex_logo.png";
 import PageContainer from "../../components/layout/PageContainer";
@@ -16,18 +16,25 @@ const ShowReviews = () => {
   }, []);
 
   return (
+    
     <PageContainer>
       <h1>Read how other people are feeling.</h1>
       <p>
         Headache? Sore body? You may be feeling anxious about your post-vaccine
         symptoms, but you are not alone!
       </p>
-      {patients &&
-        patients.map((patient) => (
+      {(patients.length<=0?<Spinner animation="border" variant="secondary"/>:
+      patients &&patients.map((patient) => (
           <Fragment key={patient._id}>
             <ReviewFormCard data={patient} />
           </Fragment>
-        ))}
+        )))}
+      {/* {
+      patients &&patients.map((patient) => (
+          <Fragment key={patient._id}>
+            <ReviewFormCard data={patient} />
+          </Fragment>
+        ))} */}
     </PageContainer>
   );
 };
@@ -49,6 +56,7 @@ const ReviewFormCard = ({ data }) => (
           <li>{data.age} years old</li>
           <li>Preexisting Conditions: {(data.conditions? data.conditions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
           <li>Symptoms: {(data.reactions? data.reactions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
+          <li>ICU: {data.icu}</li>
         </ul>
       </Col>
 
