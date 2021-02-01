@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Spinner} from "react-bootstrap";
 import "./showreviews.css";
 import Covexlogo from "../../assets/covex_logo.png";
 import PageContainer from "../../components/layout/PageContainer";
@@ -16,13 +16,14 @@ const ShowReviews = () => {
   }, []);
 
   return (
-    
+    <>
     <PageContainer>
       <h1>Read how other people are feeling.</h1>
       <p>
         Headache? Sore body? You may be feeling anxious about your post-vaccine
         symptoms, but you are not alone!
       </p>
+      
       {(patients.length<=0?<Spinner animation="border" variant="secondary"/>:
       patients &&patients.map((patient) => (
           <Fragment key={patient._id}>
@@ -36,6 +37,7 @@ const ShowReviews = () => {
           </Fragment>
         ))} */}
     </PageContainer>
+    </>
   );
 };
 

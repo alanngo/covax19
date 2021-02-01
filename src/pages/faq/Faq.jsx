@@ -13,7 +13,9 @@ const Faq = () => {
 
       <h1>Frequently Asked Questions.</h1>
 
-      <h3>We hate fake news, so here are factual and researched answers for your Covid vaccine questions.</h3>
+      <h3>We hate fake news, so here are factual and researched answers from <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html">CDC</a> and 
+      <a href="https://www.mayoclinichealthsystem.org/hometown-health/featured-topic/covid-19-vaccine-myths-debunked
+  Mayo Clinic Health System"> Mayo Health Clinic</a> for your Covid vaccine questions.</h3>
       
       <div>
     <input type="checkbox" id="question1" name="q"  class="questions"/> 
@@ -247,6 +249,11 @@ a microchip, has not been implemented in any manner and is not tied to the devel
       </ol> */}
 
       </div>
+      {/* <div align="center">
+        <h3><a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html">CDC</a> | 
+     <a href="https://www.mayoclinichealthsystem.org/hometown-health/featured-topic/covid-19-vaccine-myths-debunked
+  Mayo Clinic Health System"> Mayo Health Clinic</a></h3>
+      </div> */}
     </PageContainer>
 
    
