@@ -32,7 +32,7 @@ const data =
         bio:"A final year mechanical engineering student at IIT Bombay, India. I’m working on using Image Morphing for optimising the Die Forging process. A self-taught UI/UX designer, I'm currently learning Android App development by participating in hackathons. I love meeting new people, brainstorming ideas and collaborating with them through different projects. You can find me on the basketball court or playing chess in my free time.", 
         linkedin:" https://www.linkedin.com/in/tanyagupta10/", 
         github:"https://github.com/Tannybuoy",
-        roles: "UI designer"
+        roles: "UX/UI designer"
     },
     {
         name: "Hanniya Zohdi", 

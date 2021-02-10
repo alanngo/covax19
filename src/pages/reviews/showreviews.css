@@ -56,3 +56,16 @@ p{
     font-style: normal;
     font-weight: 100;
 }
+
+button{
+    margin-top: 1em;
+    color: #FFF8EF;
+    background-color:#B15239 ;
+    width: 30%;
+    font-family: Josefin Sans;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    padding: 10px 60px 10px 60px;
+    border-radius: 30px;
+}

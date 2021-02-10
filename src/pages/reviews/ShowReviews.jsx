@@ -5,14 +5,14 @@ import "./showreviews.css";
 import Covexlogo from "../../assets/covex_logo.png";
 import PageContainer from "../../components/layout/PageContainer";
 
-const ShowReviews = () => {
+const ShowReviews = () => 
+{
   const [patients, setPatients] = useState([]);
-  useEffect(() => {
+  let [index, setIndex] = useState(3)
+  useEffect(() => 
+  {
     const url = "https://covax19.herokuapp.com/";
-    axios.get(url).then((res) => {
-      setPatients(res.data);
-      console.log(res.data);
-    });
+    axios.get(url).then((res) => setPatients(res.data));
   }, []);
 
   return (
@@ -25,18 +25,29 @@ const ShowReviews = () => {
       </p>
       
       {(patients.length<=0?<Spinner animation="border" variant="secondary"/>:
-      patients &&patients.map((patient) => (
+      patients &&patients.slice(0,index).map((patient) => (
           <Fragment key={patient._id}>
             <ReviewFormCard data={patient} />
           </Fragment>
         )))}
-      {/* {
-      patients &&patients.map((patient) => (
-          <Fragment key={patient._id}>
-            <ReviewFormCard data={patient} />
-          </Fragment>
-        ))} */}
+      <div align="center">
+        {
+          (index>=patients.length)?<>end of results</>:<button
+          disabled={index>=patients.length}
+          onClick=
+          {
+            () =>
+            {
+              console.log("show more")
+              let tmp = index
+              setIndex(tmp+3)
+            }
+          }>Show More</button>
+        }
+        
+      </div>
     </PageContainer>
+    
     </>
   );
 };
