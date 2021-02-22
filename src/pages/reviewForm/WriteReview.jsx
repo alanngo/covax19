@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
@@ -6,7 +6,21 @@ import axios from "axios";
 
 const WriteReview = () => 
 {
-  const [review, setReview] = useState({ company: "Pfizer" , "date":new Date().toISOString().substring(0, 10)});
+  const [entries, setEntries] = useState([])
+  useEffect(() => 
+  {
+    const url = "https://covax19.herokuapp.com/";
+    axios.get(url).then(res =>setEntries(res.data))
+
+  }, []);
+  const [review, setReview] = useState
+  (
+    { 
+      company: "Pfizer", 
+      date :new Date().toISOString().substring(0, 10),
+      icu: "no"
+    }
+  );
   const handleSubmit = (e) => 
   {
     e.preventDefault();
@@ -193,10 +207,13 @@ const WriteReview = () =>
             onChange={(e) => changeValue("comments", e.target.value)}
           />
         </Form.Group>
-
-        <Button className="button" type="submit">
-          Submit Review
-        </Button>
+        {
+          (entries.length===0)?
+          <Button className="button" type="submit" disabled={true}>connecting to server...</Button>
+          :
+          <Button className="button" type="submit">Submit Review</Button>
+        }
+        
       </Form>
     </PageContainer>
   );
