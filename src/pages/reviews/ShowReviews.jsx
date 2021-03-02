@@ -1,9 +1,10 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-import { Container, Row, Col, Spinner} from "react-bootstrap";
+import {  Spinner} from "react-bootstrap";
 import "./showreviews.css";
-import Covexlogo from "../../assets/covex_logo.png";
+
 import PageContainer from "../../components/layout/PageContainer";
+import ReviewFormCard from '../../components/layout/ReviewFormCard'
 
 const ShowReviews = () => 
 {
@@ -54,37 +55,37 @@ const ShowReviews = () =>
 
 export default ShowReviews;
 
-const ReviewFormCard = ({ data }) => (
-  <Container className="reviewContent">
-    <Row>
-      <Col xs={2}>
-        <img className="logotype" src={Covexlogo} alt="Covax-19 Logo" />
-      </Col>
+// const ReviewFormCard = ({ data }) => (
+//   <Container className="reviewContent">
+//     <Row>
+//       <Col xs={2}>
+//         <img className="logotype" src={Covexlogo} alt="Covax-19 Logo" />
+//       </Col>
 
-      <Col className="details" xs={3}>
-        <ul>
-          <li>{data.company}</li>
-          <li>{data.date}</li>
-          <li>{data.location ? data.location.city : ""}</li>
-          <li>{data.age} years old</li>
-          <li>Preexisting Conditions: {(data.conditions? data.conditions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
-          <li>Symptoms: {(data.reactions? data.reactions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
-          <li>ICU: {data.icu}</li>
-        </ul>
-      </Col>
+//       <Col className="details" xs={3}>
+//         <ul>
+//           <li>{data.company}</li>
+//           <li>{data.date}</li>
+//           <li>{data.location ? data.location.city : ""}</li>
+//           <li>{data.age} years old</li>
+//           <li>Preexisting Conditions: {(data.conditions? data.conditions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
+//           <li>Symptoms: {(data.reactions? data.reactions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
+//           <li>ICU: {data.icu}</li>
+//         </ul>
+//       </Col>
 
-      <Col>
-        <p className="comment">
-          {data.comments}
-        </p>
-      </Col>
-      <Col>
-        <p className="location">
-        {data.city} {data.region} {data.country}
-        </p>
-      </Col>
-    </Row>
-  </Container>
-);
+//       <Col>
+//         <p className="comment">
+//           {data.comments}
+//         </p>
+//       </Col>
+//       <Col>
+//         <p className="location">
+//         {data.city} {data.region} {data.country}
+//         </p>
+//       </Col>
+//     </Row>
+//   </Container>
+// );
 
 

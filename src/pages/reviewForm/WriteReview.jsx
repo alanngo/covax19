@@ -29,12 +29,13 @@ const WriteReview = () =>
     else
     {
       const url = "https://covax19.herokuapp.com/";
-      axios.post(url, review).then((res) => {
-      const result = res.data;
-      if (result.hasOwnProperty("err")) alert(result.err);
-      else alert("Successfully added review");
-      console.log(result);
-    });
+      axios.post(url, review).then((res) => 
+      {
+        const result = res.data;
+        if (result.hasOwnProperty("err")) alert(result.err);
+        else alert("Successfully added review");
+        console.log(result);
+      });
     }
     
   };
@@ -146,7 +147,7 @@ const WriteReview = () =>
         <Form.Row>
           <Form.Group controlId="formBasicCheckbox">
             <Form.Text>Which vaccine did you undergo?</Form.Text>
-
+            <Col>
             <Form.Control
               as="select"
               onChange={(e) => changeValue("company", e.target.value)}
@@ -160,9 +161,11 @@ const WriteReview = () =>
               <option>Sinovac</option>
               <option>Sputnik V</option>
             </Form.Control>
+            </Col>
 
-            <br />
+            
           </Form.Group>
+           
         </Form.Row>
 
         <Form.Group controlId="formBasicCheckbox" className="mt-4">
