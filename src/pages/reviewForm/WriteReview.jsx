@@ -6,6 +6,9 @@ import axios from "axios";
 
 const WriteReview = () => 
 {
+  const companies = ["Pfizer", "Moderna", "Johnson & Johnson", "Covishield", "Covaxin", "Sinovac", "Sputnik V", "Altimmune", "GlaxoSmithKline",
+                    "BioNTech", "Heat Biologics", "Novavax", "Inovio Pharmaceuticals", "Sanofi", "Vaxart"]
+  const url = "https://covax19.herokuapp.com/";
   const [entries, setEntries] = useState([])
   useEffect(() => 
   {
@@ -24,20 +27,34 @@ const WriteReview = () =>
   const handleSubmit = (e) => 
   {
     e.preventDefault();
-    console.log(review)
+    console.log(e.target)
     if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
     else
     {
-      const url = "https://covax19.herokuapp.com/";
       axios.post(url, review).then((res) => 
       {
         const result = res.data;
         if (result.hasOwnProperty("err")) alert(result.err);
         else alert("Successfully added review");
-        console.log(result);
       });
     }
-    
+  };
+
+  const handleUpdate = (e) => 
+  {
+    e.preventDefault();
+    console.log(e.target)
+    if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
+    else
+    {
+      axios.put(url, review).then((res) => 
+      {
+        const result = res.data;
+        if (result.hasOwnProperty("err")) alert(result.err);
+        else if (result.hasOwnProperty("error")) alert(result.error);
+        else alert("Successfully updated review");
+      }).catch(err=>alert(`${err}: Problem locating email`));
+    }
   };
 
   const inFuture = (date) => date.setHours(0,0,0,0) > new Date().setHours(0,0,0,0)
@@ -54,7 +71,7 @@ const WriteReview = () =>
         analysis of your results. We have you covered!
       </p>
 
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Row className="mt-4">
           <Col>
             <Form.Control
@@ -153,17 +170,10 @@ const WriteReview = () =>
               onChange={(e) => changeValue("company", e.target.value)}
               defaultValue="Pfizer"
             >
-              <option>Pfizer</option>
-              <option>Moderna</option>
-              <option>Johnson &amp; Johnson</option>
-              <option>Covishield</option>
-              <option>Covaxin</option>
-              <option>Sinovac</option>
-              <option>Sputnik V</option>
+              {companies.map(c =>(<option>{c}</option>)) }
+
             </Form.Control>
             </Col>
-
-            
           </Form.Group>
            
         </Form.Row>
@@ -212,9 +222,16 @@ const WriteReview = () =>
         </Form.Group>
         {
           (entries.length===0)?
-          <Button className="button" type="submit" disabled={true}>connecting to server...</Button>
+          <Button className="submit" type="submit" disabled={true}>connecting to server...</Button>
           :
-          <Button className="button" type="submit">Submit Review</Button>
+          <Button className="submit" type="submit" onClick={handleSubmit}>Submit Review</Button>
+        }
+        
+        {
+          (entries.length===0)?
+          <Button className="update" type="update" disabled={true}>connecting to server...</Button>
+          :
+          <Button className="update" type="update" onClick={handleUpdate}>Update Review</Button>
         }
         
       </Form>

@@ -49,7 +49,8 @@ Form{
     overflow: hidden;
 }
 
-.button{
+.submit
+{
     margin-top: 1em;
     color: #F2F3F4;
     width: 50%;
@@ -61,8 +62,26 @@ Form{
     border-radius: 30px;
     background-color: #A37846;
 }
+.update
+{
+    margin-top: 1em;
+    color: #F2F3F4;
+    width: 50%;
+    font-family: Josefin Sans;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    padding: 10px 60px 10px 60px;
+    border-radius: 30px;
+    background-color: #345276;
+}
 
-.button:hover{
+.submit:hover{
+    background-color: white;
+    color: black;
+    transition: 0.3s;
+}
+.update:hover{
     background-color: white;
     color: black;
     transition: 0.3s;

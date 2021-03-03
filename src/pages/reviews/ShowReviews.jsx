@@ -1,6 +1,12 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-import {  Spinner} from "react-bootstrap";
+import 
+{ 
+  Spinner, 
+  // Dropdown, 
+  // ButtonGroup, 
+  // DropdownButton
+} from "react-bootstrap";
 import "./showreviews.css";
 
 import PageContainer from "../../components/layout/PageContainer";
@@ -18,6 +24,7 @@ const ShowReviews = () =>
 
   return (
     <>
+    
     <PageContainer>
       <h1>Read how other people are feeling.</h1>
       <p>
@@ -33,7 +40,8 @@ const ShowReviews = () =>
         )))}
       <div align="center">
         {
-          (index>=patients.length)?<>end of results</>:<button
+          (index>=patients.length)?<>end of results</>:
+          <button
           disabled={index>=patients.length}
           onClick=
           {

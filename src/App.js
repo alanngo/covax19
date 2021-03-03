@@ -7,7 +7,8 @@ import WriteReview from "./pages/reviewForm/WriteReview";
 import ShowReviews from "./pages/reviews/ShowReviews";
 import About from "./pages/about/About";
 
-const App = () => (
+const App = () => 
+(
   <Fragment>
     <Router>
       <Switch>
