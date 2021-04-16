@@ -1,12 +1,14 @@
 
-import React, {Fragment} from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import Covexlogo from "../../assets/covex_logo.png";
 import "./reviewForm.css"
+
+const enumerate = (arr, emoji) =>(arr?arr.map(e =><div className="txtVal" key={e}>{`${emoji}  ${e} `}</div>):"")
 const ReviewFormCard = ({ data }) => 
 {
     return (
-        <Container className="reviewContent">
+        <div className="reviewContent">
             <Row>
             <Col xs={2}>
                 <img className="logotype" src={Covexlogo} alt="Covax-19 Logo" />
@@ -17,9 +19,9 @@ const ReviewFormCard = ({ data }) =>
                 <li>{data.company}</li>
                 <li>{data.date}</li>
                 <li>{data.location ? data.location.city : ""}</li>
-                <li>{data.age} years old</li>
-                <li>Preexisting Conditions: {(data.conditions? data.conditions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
-                <li>Symptoms: {(data.reactions? data.reactions.map(e =><Fragment key={e}>{e+" "}</Fragment>):"")}</li>
+                <li>{data.age? `${data.age} years old`:""}</li>
+                <li>Preexisting Conditions: {(enumerate(data.conditions, `😵`))}</li>
+                <li>Symptoms: {enumerate(data.reactions, `💉`)}</li>
                 <li>ICU: {data.icu}</li>
                 </ul>
             </Col>
@@ -35,7 +37,7 @@ const ReviewFormCard = ({ data }) =>
                 </p>
             </Col>
             </Row>
-        </Container>
+        </div>
     )
 }
 

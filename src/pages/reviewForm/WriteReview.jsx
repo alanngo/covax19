@@ -7,7 +7,7 @@ import axios from "axios";
 const WriteReview = () => 
 {
   const companies = ["Pfizer", "Moderna", "Johnson & Johnson", "Covishield", "Covaxin", "Sinovac", "Sputnik V", "Altimmune", "GlaxoSmithKline",
-                    "BioNTech", "Heat Biologics", "Novavax", "Inovio Pharmaceuticals", "Sanofi", "Vaxart"]
+                    "BioNTech", "Heat Biologics", "Novavax", "Inovio Pharmaceuticals", "Sanofi", "Vaxart", " AstraZeneca"]
   const url = "https://covax19.herokuapp.com/";
   const [entries, setEntries] = useState([])
   useEffect(() => 
@@ -29,6 +29,7 @@ const WriteReview = () =>
     e.preventDefault();
     console.log(e.target)
     if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
+
     else
     {
       axios.post(url, review).then((res) => 

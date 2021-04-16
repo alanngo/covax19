@@ -44,8 +44,8 @@ p{
 
 .reviewContent{
     background-color: #FFF8EF;
-    border-radius: 30px;
-    padding: 0.5em;
+    /* border-radius: 30px; */
+    /* padding: 0.5em; */
     margin-top: 2em;
 }
 
@@ -68,4 +68,8 @@ button{
     border: none;
     padding: 10px 60px 10px 60px;
     border-radius: 30px;
+}
+
+.txtVal{
+    color:red
 }
