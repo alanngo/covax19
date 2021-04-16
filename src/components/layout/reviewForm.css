@@ -44,7 +44,7 @@ p{
 
 .reviewContent{
     background-color: #FFF8EF;
-    /* border-radius: 30px; */
+    border-radius: 30px;
     /* padding: 0.5em; */
     margin-top: 2em;
 }
