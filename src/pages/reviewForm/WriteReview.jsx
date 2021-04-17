@@ -27,7 +27,6 @@ const WriteReview = () =>
   const handleSubmit = (e) => 
   {
     e.preventDefault();
-    console.log(e.target)
     if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
 
     else
@@ -37,7 +36,7 @@ const WriteReview = () =>
         const result = res.data;
         if (result.hasOwnProperty("err")) alert(result.err);
         else alert("Successfully added review");
-      });
+      }).catch(() =>alert(`Email already exists! Click on 'Update Review' to update your review `));
     }
   };
 
