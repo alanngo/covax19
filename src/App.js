@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Faq from "./pages/faq/Faq";
 import LandingPage from "./pages/landingPage/LandingPage";
@@ -9,7 +8,7 @@ import About from "./pages/about/About";
 
 const App = () => 
 (
-  <Fragment>
+  <>
     <Router>
       <Switch>
         <Route path="/test">
@@ -32,7 +31,7 @@ const App = () =>
         </Route>
       </Switch>
     </Router>
-  </Fragment>
+  </>
 );
 
 export default App;

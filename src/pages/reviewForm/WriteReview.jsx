@@ -3,19 +3,14 @@ import { Button, Form, Col } from "react-bootstrap";
 import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
+import { companies, url } from "../../helper/constants";
 
 const WriteReview = () => 
 {
-  const companies = ["Pfizer", "Moderna", "Johnson & Johnson", "Covishield", "Covaxin", "Sinovac", "Sputnik V", "Altimmune", "GlaxoSmithKline",
-                    "BioNTech", "Heat Biologics", "Novavax", "Inovio Pharmaceuticals", "Sanofi", "Vaxart", " AstraZeneca"]
-  const url = "https://covax19.herokuapp.com/";
   const [entries, setEntries] = useState([])
   useEffect(() => 
-  {
-    const url = "https://covax19.herokuapp.com/";
     axios.get(url).then(res =>setEntries(res.data))
-
-  }, []);
+, []);
   const [review, setReview] = useState
   (
     { 
@@ -76,7 +71,7 @@ const WriteReview = () =>
           <Col>
             <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="Email"
               onChange={(e) => changeValue("_id", e.target.value)}
             />
             <Form.Text className="text-white list">
@@ -104,7 +99,7 @@ const WriteReview = () =>
               placeholder="Date of vaccine"
               onChange={(e) => changeValue("date", e.target.value)}
             />
-            <Form.Text>Date vaccine taken</Form.Text>
+            <Form.Text>Date vaccine taken (date of your latest dose)</Form.Text>
           </Col>
 
           <Col>
@@ -163,16 +158,17 @@ const WriteReview = () =>
 
         <Form.Row>
           <Form.Group controlId="formBasicCheckbox">
-            <Form.Text>Which vaccine did you undergo?</Form.Text>
             <Col>
             <Form.Control
               as="select"
               onChange={(e) => changeValue("company", e.target.value)}
               defaultValue="Pfizer"
             >
-              {companies.map(c =>(<option>{c}</option>)) }
+              {companies.map(c =>(<option key={c}>{c}</option>)) }
 
             </Form.Control>
+            <Form.Text>Which vaccine did you undergo?</Form.Text>
+
             </Col>
           </Form.Group>
            
@@ -222,14 +218,14 @@ const WriteReview = () =>
         </Form.Group>
         {
           (entries.length===0)?
-          <Button className="submit" type="submit" disabled={true}>connecting to server...</Button>
+          <Button className="submit" type="submit" disabled>connecting to server...</Button>
           :
           <Button className="submit" type="submit" onClick={handleSubmit}>Submit Review</Button>
         }
         
         {
           (entries.length===0)?
-          <Button className="update" type="update" disabled={true}>connecting to server...</Button>
+          <Button className="update" type="update" disabled>connecting to server...</Button>
           :
           <Button className="update" type="update" onClick={handleUpdate}>Update Review</Button>
         }

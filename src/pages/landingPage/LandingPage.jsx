@@ -2,8 +2,8 @@ import FullPageContainer from "../../components/layout/FullPageContainer";
 import "./landing.css";
 import { Link } from "react-router-dom";
 
-const LandingPage = () => {
-  return (
+const LandingPage = () => 
+(
     <FullPageContainer>
       <div className="landing--panels panel-green"></div>
 
@@ -32,7 +32,7 @@ const LandingPage = () => {
       </div>
 
     </FullPageContainer>
-  );
-};
+);
+
 
 export default LandingPage;

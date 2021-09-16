@@ -2,12 +2,11 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Covexlogo from "../../assets/covex_logo.png";
+import { enumerate } from '../../helper/functions';
 import "./reviewForm.css"
 
-const enumerate = (arr, emoji) =>(arr?arr.map(e =><div className="txtVal" key={e}>{`${emoji}  ${e} `}</div>):"")
-const ReviewFormCard = ({ data }) => 
-{
-    return (
+const ReviewFormCard = ({ data }) =>  
+(
         <div className="reviewContent">
             <Row>
             <Col xs={2}>
@@ -38,7 +37,5 @@ const ReviewFormCard = ({ data }) =>
             </Col>
             </Row>
         </div>
-    )
-}
-
+)
 export default ReviewFormCard;

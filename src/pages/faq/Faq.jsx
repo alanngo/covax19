@@ -2,14 +2,10 @@ import PageContainer from "../../components/layout/PageContainer";
 import "./faqs.css";
 
 
-const Faq = () => {
-  return (
-   
+const Faq = () =>  
+(
     <PageContainer>
       <div className="faqcontainer">
-        
-
-      
 
       <h1>Frequently Asked Questions.</h1>
 
@@ -18,12 +14,12 @@ const Faq = () => {
   Mayo Clinic Health System"> Mayo Health Clinic</a> for your Covid vaccine questions.</h3>
       
       <div>
-    <input type="checkbox" id="question1" name="q"  class="questions"/> 
-    <div class="plus">+</div>
-    <label for="question1" class="question">
+    <input type="checkbox" id="question1" name="q"  className="questions"/> 
+    <div className="plus">+</div>
+    <label htmlFor="question1" className="question">
     Is the COVID-19 vaccine safe given that it was rapidly developed and tested? 
     </label>
-    <div class="answers">
+    <div className="answers">
       <p>Many pharmaceutical companies invested significant resources into quickly developing a vaccine for COVID-19 because of the world-wide impact of the pandemic. 
         The emergency situation warranted an emergency response but that does not mean that companies bypassed safety protocols or didn't perform adequate testing. </p>
        <p> While there are many COVID-19 vaccine candidates in development, early interim data are encouraging for the Pfizer vaccine which likely is to be the first authorized for emergency use by the FDA in the late December/early January timeframe. 
@@ -37,12 +33,12 @@ const Faq = () => {
  </div>
 
   <div>
-  <input type="checkbox" id="question2" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question2" class="question">
+  <input type="checkbox" id="question2" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question2" className="question">
   Is it true that the flu vaccine already helps protect me from COVID-19?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>
     While the flu and COVID-19 share similar symptoms, they are two different illnesses caused by two different viruses.
     There is no evidence to support the claim that the flu vaccine protects against the coronavirus. </p>
@@ -53,12 +49,12 @@ const Faq = () => {
   </div>
 </div>
 <div>
-  <input type="checkbox" id="question3" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question3" class="question">
+  <input type="checkbox" id="question3" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question3" className="question">
   Does it still make sense to get vaccinated against COVID-19 given that it has a rather high survival rate?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>
     Circulating on social media is the claim that COVID-19's mortality rate is 1%-2% and that people should not be 
     vaccinated against a virus with a high survival rate. However, a 1% mortality rate is 10 times more lethal than the seasonal flu. 
@@ -73,12 +69,12 @@ const Faq = () => {
   </div>
 </div>
 <div>
-  <input type="checkbox" id="question4" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question4" class="question">
+  <input type="checkbox" id="question4" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question4" className="question">
   Should I still get a vaccine if I already had COVID-19 and have recovered?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>
     There is not enough information currently available to say if or for how long after infection 
     someone is protected from getting COVID-19 again. This is called natural immunity. 
@@ -91,12 +87,12 @@ const Faq = () => {
 </div>
 
 <div>
-  <input type="checkbox" id="question5" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question5" class="question">
+  <input type="checkbox" id="question5" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question5" className="question">
   Should I still wear a mask and practice social distancing after I get vaccinated for COVID-19?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>It may take time for everyone who wants a COVID-19 vaccination to get one. 
       Also, while the vaccine may prevent you from getting sick, 
       it is unknown at this time if you can still carry and transmit the virus to others. Until more is understood about how well the vaccine works, 
@@ -105,12 +101,12 @@ const Faq = () => {
   </div>
 </div>
 <div>
-  <input type="checkbox" id="question6" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question6" class="question">
+  <input type="checkbox" id="question6" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question6" className="question">
   Can I suffer a fatal or severe allergic reaction to the vaccine? What should I do if I get one?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>Serious problems from vaccination can happen, but they are rare. CDC has learned of reports that some people have experienced severe allergic reactions—also known as anaphylaxis—after getting a COVID-19 vaccine. As an example, an allergic reaction is considered severe when a person needs to be treated with epinephrine or EpiPen© or if they must go to the hospital.
 The CDC released guidance for those who have allergic reactions: </p>
 
@@ -164,12 +160,12 @@ The CDC released guidance for those who have allergic reactions: </p>
 </div>
 
 <div>
-  <input type="checkbox" id="question7" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question7" class="question">
+  <input type="checkbox" id="question7" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question7" className="question">
   Do COVID-19 vaccines cause infertility or miscarriage?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>No, COVID-19 vaccines have not been linked to infertility or miscarriage. </p>
 
 <p> A sophisticated disinformation campaign has been circulating online, claiming that antibodies to the spike protein of COVID-19 produced 
@@ -192,12 +188,12 @@ The CDC released guidance for those who have allergic reactions: </p>
 </div>
 
 <div>
-  <input type="checkbox" id="question8" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question8" class="question">
+  <input type="checkbox" id="question8" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question8" className="question">
   Will COVID-19 vaccine alter my DNA?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>The first COVID-19 vaccines to reach the market are likely to be messenger RNA (mRNA) vaccines. According to 
       the CDC, mRNA vaccines work by instructing cells in the body how to make a protein that triggers an immune response.
        Injecting mRNA into your body will not interact or do anything to the DNA of your cells. Human cells break down and get
@@ -207,12 +203,12 @@ The CDC released guidance for those who have allergic reactions: </p>
 </div>
 
 <div>
-  <input type="checkbox" id="question9" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question9" class="question">
+  <input type="checkbox" id="question9" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question9" className="question">
   Is it true that COVID-19 vaccine was developed to control the general population either through microchip tracking or “nanotransducers” in our brain?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>There is no vaccine microchip, and the vaccine will not track people or gather personal information into a database. </p>
 
 <p> This myth started after comments made by Bill Gates from The Gates Foundation about a digital certificate of vaccine records. The technology he was referencing is not 
@@ -222,12 +218,12 @@ a microchip, has not been implemented in any manner and is not tied to the devel
 </div>
 
 <div>
-  <input type="checkbox" id="question10" name="q" class="questions"/>
-  <div class="plus">+</div>
-  <label for="question10" class="question">
+  <input type="checkbox" id="question10" name="q" className="questions"/>
+  <div className="plus">+</div>
+  <label htmlFor="question10" className="question">
   Is it true that COVID-19 vaccine was developed using fetal tissue?
   </label>
-  <div class="answers">
+  <div className="answers">
     <p>Neither the Pfizer/BioNTech COVID-19 vaccine 
       nor the Moderna COVID-19 vaccines contain fetal cells nor were fetal cells used the development or production of either vaccine. </p>
     
@@ -259,7 +255,7 @@ a microchip, has not been implemented in any manner and is not tied to the devel
    
 
   );
-};
+
 export default Faq;
 
 
