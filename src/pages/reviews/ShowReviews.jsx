@@ -65,15 +65,7 @@ const ShowReviews = () =>
           (index>=filtered.length)?<></>:
           <button
           disabled={index>=filtered.length}
-          onClick=
-          {
-            () =>
-            {
-              console.log("show more")
-              let tmp = index
-              setIndex(tmp+3)
-            }
-          }>Show More</button>
+          onClick={() =>setIndex(index+3)}>Show More</button>
         }
         {
           (patients.length>0 && filtered.length<=0)?<>no reviews available</>:<></>

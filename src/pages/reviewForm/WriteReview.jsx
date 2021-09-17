@@ -4,6 +4,7 @@ import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
 import { companies, url } from "../../helper/constants";
+import { inFuture } from "../../helper/functions";
 
 const WriteReview = () => 
 {
@@ -52,7 +53,6 @@ const WriteReview = () =>
     }
   };
 
-  const inFuture = (date) => date.setHours(0,0,0,0) > new Date().setHours(0,0,0,0)
 
   const changeValue = (key, value) =>
     setReview({ ...review, [`${key}`]: value });
@@ -84,7 +84,7 @@ const WriteReview = () =>
               type="number"
               placeholder="Age"
               min={0}
-              onChange={(e) => changeValue("age", e.target.value) }
+              onChange={(e) => changeValue("age",  Number(e.target.value)) }
             />
             <Form.Text className="text-white list">
               Age
