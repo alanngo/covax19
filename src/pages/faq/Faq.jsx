@@ -1,7 +1,6 @@
 import PageContainer from "../../components/layout/PageContainer";
 import "./faqs.css";
 
-
 const Faq = () =>
 (
   <PageContainer>

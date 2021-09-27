@@ -67,14 +67,18 @@ button:hover{
     width:80%;
 }
 
-.writeButton{
+.blueButton{
     background-color: #345276;
 }
 
-.browseButton{
+.yellowButton{
     background-color: #A37846;
 }
 
-.faqButton{
+.greenButton{
     background-color: #4A5E49;
+}
+
+.redButton{
+    background-color: #B15239;
 }

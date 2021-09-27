@@ -4,7 +4,7 @@ import Alan from "../assets/alan.jpg"
 import Nathan from "../assets/nathan.png"
 import Olga from "../assets/olga.jpg"
 
-export const url ="https://covax19.herokuapp.com/"
+export const url = process.env.REACT_APP_BACKEND_URL
 export const companies = 
 [
     "Pfizer", 

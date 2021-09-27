@@ -16,15 +16,19 @@ const LandingPage = () =>
       <div className="buttonGroup">
 
         <Link to="/writeReview" style={{ textDecoration: 'none' }}>
-          <button className="writeButton">Write a review</button>
+          <button className="redButton">Write a Review</button>
         </Link>
 
         <Link to="/showReviews" style={{ textDecoration: 'none' }}>
-          <button className="browseButton" as={Link} to="/showReviews">Browse reviews</button>
+          <button className="yellowButton" as={Link} to="/showReviews">Browse Reviews</button>
         </Link>
 
         <Link to="/faq" style={{ textDecoration: 'none' }}>
-          <button className="faqButton" as={Link} to="/faq">FAQ</button>
+          <button className="greenButton" as={Link} to="/faq">FAQ</button>
+        </Link>
+
+        <Link to="/about" style={{ textDecoration: 'none' }}>
+          <button className="blueButton" as={Link} to="/about">Meet The Team</button>
         </Link>
 
       </div>
