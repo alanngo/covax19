@@ -15,6 +15,13 @@ export const inFuture = (date) => date.setHours(0,0,0,0) > new Date().setHours(0
 
 /**
  * 
+ * @param {Date} date 
+ * @returns {String}
+ */
+export const parseDate = (date) => String(date).substring(0, 10)
+
+/**
+ * 
  * @param {string} myString 
  * @param {string} compareTo 
  */
