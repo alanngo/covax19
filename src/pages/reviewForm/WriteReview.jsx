@@ -28,7 +28,7 @@ const WriteReview = () =>
 
     else
     {
-      axios.post(url, review).then((res) => 
+      axios.post(`${url}/insertReview`, review).then((res) => 
       {
         const result = res.data;
         if (result.hasOwnProperty("err")) alert(result.err);
@@ -44,7 +44,7 @@ const WriteReview = () =>
     if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
     else
     {
-      axios.put(url, review).then((res) => 
+      axios.put(`${url}/updateReview`, review).then((res) => 
       {
         const result = res.data;
         if (result.hasOwnProperty("err")) alert(result.err);
