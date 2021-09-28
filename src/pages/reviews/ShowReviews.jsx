@@ -14,12 +14,12 @@ import { companies, url } from "../../helper/constants";
 
 const ShowReviews = () => 
 {
-  const [patients, setPatients] = useState([]);
-  const [filtered, setFiltered]= useState(patients)
+  const [patients, setPatients] = useState([])
+  const [filtered, setFiltered]= useState([])
   const [index, setIndex] = useState(3)
   useEffect(() => 
   {
-    axios.get(url).then((res) =>{
+    axios.get(`${url}/reviews`).then((res) =>{
       setPatients(res.data)
       setFiltered(res.data)
     } );

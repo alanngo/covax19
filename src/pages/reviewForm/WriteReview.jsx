@@ -8,9 +8,10 @@ import { inFuture } from "../../helper/functions";
 
 const WriteReview = () => 
 {
-  const [entries, setEntries] = useState([])
+  const [loaded, setLoaded] = useState(false)
+
   useEffect(() => 
-    axios.get(url).then(res =>setEntries(res.data))
+    axios.get(`${url}/`).then(res =>setLoaded(res.data.loaded))
 , []);
   const [review, setReview] = useState
   (
@@ -217,14 +218,14 @@ const WriteReview = () =>
           />
         </Form.Group>
         {
-          (entries.length===0)?
+          (!loaded)?
           <Button className="submit" type="submit" disabled>connecting to server...</Button>
           :
           <Button className="submit" type="submit" onClick={handleSubmit}>Submit Review</Button>
         }
         
         {
-          (entries.length===0)?
+          (!loaded)?
           <Button className="update" type="update" disabled>connecting to server...</Button>
           :
           <Button className="update" type="update" onClick={handleUpdate}>Update Review</Button>
