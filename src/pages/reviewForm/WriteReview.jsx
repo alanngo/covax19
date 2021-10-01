@@ -1,56 +1,41 @@
 import { useState, useEffect } from "react";
-import { Button, Form, Col } from "react-bootstrap";
+import { Button, Form, Col, Spinner } from "react-bootstrap";
 import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
 import { companies, url } from "../../helper/constants";
-import { inFuture } from "../../helper/functions";
+import { invalidAge, invalidDate } from "../../helper/functions";
+import { useHistory } from "react-router-dom";
 
-const WriteReview = () => 
-{
+const WriteReview = () => {
   const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => 
-    axios.get(`${url}/`).then(res =>setLoaded(res.data.loaded))
-, []);
   const [review, setReview] = useState
-  (
-    { 
-      company: "Pfizer", 
-      date :new Date().toISOString().substring(0, 10),
-      icu: "no"
-    }
-  );
-  const handleSubmit = (e) => 
+    (
+      {
+        company: "Pfizer",
+        date: new Date().toISOString().substring(0, 10),
+        icu: "no",
+        age: 0
+      }
+    )
+  const history = useHistory()
+
+  useEffect(() =>
+    axios.get(`${url}/`).then(res => setLoaded(res.data.loaded)), []);
+
+
+  const handleSubmit = (e) => // using upsert functionality to avoid confusion and redundancy
   {
     e.preventDefault();
-    if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
-
-    else
-    {
-      axios.post(`${url}/insertReview`, review).then((res) => 
-      {
-        const result = res.data;
-        if (result.hasOwnProperty("err")) alert(result.err);
-        else alert("Successfully added review");
-      }).catch(() =>alert(`Email already exists! Click on 'Update Review' to update your review `));
-    }
-  };
-
-  const handleUpdate = (e) => 
-  {
-    e.preventDefault();
-    console.log(e.target)
-    if (inFuture(new Date(review.date))) alert("choose a date that is not in the future")
-    else
-    {
-      axios.put(`${url}/updateReview`, review).then((res) => 
-      {
+    if (invalidDate(new Date(review.date))) alert("choose a date that is not in the future or not earlier than 2021")
+    if (invalidAge(review.age)) alert("age cannot be negative")
+    else {
+      axios.put(`${url}/updateReview`, review).then((res) => {
         const result = res.data;
         if (result.hasOwnProperty("err")) alert(result.err);
         else if (result.hasOwnProperty("error")) alert(result.error);
-        else alert("Successfully updated review");
-      }).catch(err=>alert(`${err}: Problem locating email`));
+        else history.push("/showReviews")
+      }).catch(err => alert(`${err}: Problem locating email`));
     }
   };
 
@@ -62,7 +47,7 @@ const WriteReview = () =>
     <PageContainer>
       <h1 className="reviewTitle">Share your post-vaccine review with us.</h1>
       <p>
-        Your experience with the Covid vaccine is important to us, and important
+        Your experience with the Covid vaccine is important to us and
         to others. Let us know how you feel. We will contact you with an
         analysis of your results. We have you covered!
       </p>
@@ -72,7 +57,7 @@ const WriteReview = () =>
           <Col>
             <Form.Control
               type="email"
-              placeholder="Email"
+              placeholder="Email*"
               onChange={(e) => changeValue("_id", e.target.value)}
             />
             <Form.Text className="text-white list">
@@ -85,7 +70,7 @@ const WriteReview = () =>
               type="number"
               placeholder="Age"
               min={0}
-              onChange={(e) => changeValue("age",  Number(e.target.value)) }
+              onChange={(e) => changeValue("age", Number(e.target.value))}
             />
             <Form.Text className="text-white list">
               Age
@@ -133,7 +118,7 @@ const WriteReview = () =>
               placeholder="City"
               onChange={(e) => changeValue("city", e.target.value)}
             />
-              <Form.Text className="text-white list">
+            <Form.Text className="text-white list">
               City
             </Form.Text>
           </Col>
@@ -157,22 +142,36 @@ const WriteReview = () =>
           </Col>
         </Form.Row>
 
-        <Form.Row>
-          <Form.Group controlId="formBasicCheckbox">
-            <Col>
-            <Form.Control
-              as="select"
-              onChange={(e) => changeValue("company", e.target.value)}
-              defaultValue="Pfizer"
-            >
-              {companies.map(c =>(<option key={c}>{c}</option>)) }
+        <Form.Row className="mt-4"> 
+        <Col>
+          <Form.Group controlId="dropdown">
+              <Form.Control
+                as="select"
+                onChange={(e) => changeValue("company", e.target.value)}
+                defaultValue="Pfizer"
+              >
+                {companies.map(c => (<option key={c}>{c}</option>))}
 
-            </Form.Control>
-            <Form.Text>Which vaccine did you undergo?</Form.Text>
+              </Form.Control>
+              <Form.Text>Which vaccine did you undergo?</Form.Text>
 
-            </Col>
           </Form.Group>
-           
+          </Col>
+          <Col>
+            <Form.Group>
+              <Form.Control  
+              as="select" 
+              defaultValue="no"
+              onChange ={(e) => changeValue("icu", e.target.value)}>
+                  <option>yes</option>
+                  <option>no</option>
+              </Form.Control>
+              <Form.Text>
+                Have you been hospitalized because of the vaccine?
+              </Form.Text>
+              
+            </Form.Group>
+          </Col>
         </Form.Row>
 
         <Form.Group controlId="formBasicCheckbox" className="mt-4">
@@ -188,26 +187,7 @@ const WriteReview = () =>
             List your reactions with commas as separators.
           </Form.Text>
         </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Text>
-            Have you been to the ICU for Covid-related reasons?
-          </Form.Text>
 
-          <Form.Check
-            type="radio"
-            className="check"
-            name="condition"
-            label="Yes"
-            onChange={() => changeValue("icu", "yes")}
-          />
-          <Form.Check
-            type="radio"
-            className="check"
-            name="condition"
-            label="No"
-            onChange={() => changeValue("icu", "no")}
-          />
-        </Form.Group>
 
         <Form.Group controlId="controlTextarea" className="mt-4">
           <Form.Control
@@ -217,20 +197,19 @@ const WriteReview = () =>
             onChange={(e) => changeValue("comments", e.target.value)}
           />
         </Form.Group>
-        {
-          (!loaded)?
-          <Button className="submit" type="submit" disabled>connecting to server...</Button>
-          :
-          <Button className="submit" type="submit" onClick={handleSubmit}>Submit Review</Button>
-        }
-        
-        {
-          (!loaded)?
-          <Button className="update" type="update" disabled>connecting to server...</Button>
-          :
-          <Button className="update" type="update" onClick={handleUpdate}>Update Review</Button>
-        }
-        
+        <div align="right">
+          {
+            (loaded) ?
+              <>
+                <Button className="submit" type="submit" onClick={handleSubmit}>Submit Review</Button>
+              </> :
+              <>
+                <p>connecting to server...</p>
+                <Spinner animation="border" variant="secondary" />
+              </>
+          }
+        </div>
+
       </Form>
     </PageContainer>
   );
