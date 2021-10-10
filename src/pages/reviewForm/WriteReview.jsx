@@ -6,29 +6,21 @@ import axios from "axios";
 import { companies, url } from "../../helper/constants";
 import { invalidAge, invalidDate, toTitle } from "../../helper/functions";
 import { useHistory } from "react-router-dom";
+import reviewSchema from "../../schema/review";
 
 const WriteReview = () => {
   // use state
   const [loaded, setLoaded] = useState(false)
-  const [review, setReview] = useState
-    (
-      {
-        company: "Pfizer",
-        date: new Date().toISOString().substring(0, 10),
-        icu: "no",
-        age: 0,
-        country: "United States"
-      }
-    )
+  const [review, setReview] = useState(reviewSchema)
   const [countries, setCountries] = useState([])
 
   // use memo
-  const sortedCountries = useMemo(() =>countries.sort((a,b)=>{
+  const sortedCountries = useMemo(() => countries.sort((a, b) => {
     let c0 = a.name.common
     let c1 = b.name.common
 
-    if (c0 >c1) return 1
-    if (c0<c1) return -1
+    if (c0 > c1) return 1
+    if (c0 < c1) return -1
     return 0
   }), [countries])
 
@@ -36,11 +28,9 @@ const WriteReview = () => {
   const history = useHistory()
 
   // use effect
-  useEffect(() =>
-  {
+  useEffect(() => {
     axios.get(`${url}/`).then(res => setLoaded(res.data.loaded))
-    axios.get("https://restcountries.com/v3.1/all").then(res =>setCountries(res.data))
-
+    axios.get("https://restcountries.com/v3.1/all").then(res => setCountries(res.data))
   }, [])
 
   //misc
@@ -109,15 +99,15 @@ const WriteReview = () => {
           </Col>
 
           <Col>
-          <Form.Control
-                as="select"
-                onChange={(e) => changeValue("country", e.target.value)}
-                defaultValue="United States"
-              >
-                {sortedCountries.map(c => (<option key={c.name.common}>{c.name.common}</option>))}
+            <Form.Control
+              as="select"
+              onChange={(e) => changeValue("country", e.target.value)}
+              defaultValue="United States"
+            >
+              {sortedCountries.map(c => (<option key={c.name.common}>{c.name.common}</option>))}
 
-              </Form.Control>
-              <Form.Text>Country</Form.Text>
+            </Form.Control>
+            <Form.Text>Country</Form.Text>
           </Col>
         </Form.Row>
 
@@ -160,9 +150,9 @@ const WriteReview = () => {
           </Col>
         </Form.Row>
 
-        <Form.Row className="mt-4"> 
-        <Col>
-          <Form.Group controlId="dropdown">
+        <Form.Row className="mt-4">
+          <Col>
+            <Form.Group controlId="dropdown">
               <Form.Control
                 as="select"
                 onChange={(e) => changeValue("company", e.target.value)}
@@ -173,21 +163,21 @@ const WriteReview = () => {
               </Form.Control>
               <Form.Text>Which vaccine did you undergo?</Form.Text>
 
-          </Form.Group>
+            </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Control  
-              as="select" 
-              defaultValue="no"
-              onChange ={(e) => changeValue("icu", e.target.value)}>
-                  <option>yes</option>
-                  <option>no</option>
+              <Form.Control
+                as="select"
+                defaultValue="no"
+                onChange={(e) => changeValue("icu", e.target.value)}>
+                <option>yes</option>
+                <option>no</option>
               </Form.Control>
               <Form.Text>
                 Have you been hospitalized because of the vaccine?
               </Form.Text>
-              
+
             </Form.Group>
           </Col>
         </Form.Row>
@@ -196,7 +186,7 @@ const WriteReview = () => {
           <Form.Control
             type="textbox"
             placeholder="List any reactions you had after taking the vaccine"
-            onChange={(e) => changeValue("reactions",  e.target.value.split(", ")) }
+            onChange={(e) => changeValue("reactions", e.target.value.split(", "))}
           />
           <Form.Text className="text-white list">
             List your reactions with commas as separators.

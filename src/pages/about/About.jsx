@@ -1,13 +1,10 @@
 import PageContainer from "../../components/layout/PageContainer";
-
-
 import "./about.css";
 import { CardDeck, Card, Button } from "react-bootstrap";
 import { team } from "../../helper/constants";
 const About = () =>
 (
     <>
-
         <div align="center">
             <PageContainer>
                 <h2 className="teamTitle">Meet team behind Covax-19</h2>
