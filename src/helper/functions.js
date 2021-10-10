@@ -49,3 +49,11 @@ export const hasSymptoms = (array) =>
         array.some(e => ignoreCase(e, "na")) ||
         array.some(e => e === "")
     )
+
+/**
+ * 
+ * @param {string} myString 
+ * @returns {string}
+ */
+export const toTitle = (myString) => myString.replace( /\w\S*/g, 
+    (txt) =>txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())

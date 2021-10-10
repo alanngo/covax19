@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button, Form, Col, Spinner } from "react-bootstrap";
 import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
 import { companies, url } from "../../helper/constants";
-import { invalidAge, invalidDate } from "../../helper/functions";
+import { invalidAge, invalidDate, toTitle } from "../../helper/functions";
 import { useHistory } from "react-router-dom";
 
 const WriteReview = () => {
+  // use state
   const [loaded, setLoaded] = useState(false)
   const [review, setReview] = useState
     (
@@ -15,15 +16,34 @@ const WriteReview = () => {
         company: "Pfizer",
         date: new Date().toISOString().substring(0, 10),
         icu: "no",
-        age: 0
+        age: 0,
+        country: "United States"
       }
     )
+  const [countries, setCountries] = useState([])
+
+  // use memo
+  const sortedCountries = useMemo(() =>countries.sort((a,b)=>{
+    let c0 = a.name.common
+    let c1 = b.name.common
+
+    if (c0 >c1) return 1
+    if (c0<c1) return -1
+    return 0
+  }), [countries])
+
+  // use history
   const history = useHistory()
 
+  // use effect
   useEffect(() =>
-    axios.get(`${url}/`).then(res => setLoaded(res.data.loaded)), []);
+  {
+    axios.get(`${url}/`).then(res => setLoaded(res.data.loaded))
+    axios.get("https://restcountries.com/v3.1/all").then(res =>setCountries(res.data))
 
+  }, [])
 
+  //misc
   const handleSubmit = (e) => // using upsert functionality to avoid confusion and redundancy
   {
     e.preventDefault();
@@ -89,14 +109,15 @@ const WriteReview = () => {
           </Col>
 
           <Col>
-            <Form.Control
-              type="text"
-              placeholder="Country"
-              onChange={(e) => changeValue("country", e.target.value)}
-            />
-            <Form.Text className="text-white list">
-              Country
-            </Form.Text>
+          <Form.Control
+                as="select"
+                onChange={(e) => changeValue("country", e.target.value)}
+                defaultValue="United States"
+              >
+                {sortedCountries.map(c => (<option key={c.name.common}>{c.name.common}</option>))}
+
+              </Form.Control>
+              <Form.Text>Country</Form.Text>
           </Col>
         </Form.Row>
 
@@ -105,7 +126,7 @@ const WriteReview = () => {
             <Form.Control
               type="text"
               placeholder="State/Region/Province"
-              onChange={(e) => changeValue("region", e.target.value)}
+              onChange={(e) => changeValue("region", toTitle(e.target.value))}
             />
             <Form.Text className="text-white list">
               Region
@@ -116,7 +137,7 @@ const WriteReview = () => {
             <Form.Control
               type="text"
               placeholder="City"
-              onChange={(e) => changeValue("city", e.target.value)}
+              onChange={(e) => changeValue("city", toTitle(e.target.value))}
             />
             <Form.Text className="text-white list">
               City
@@ -130,10 +151,7 @@ const WriteReview = () => {
               <Form.Control
                 type="textbox"
                 placeholder="Do you have any pre-existing conditions?"
-                onChange={(e) => {
-                  let words = e.target.value.split(", ");
-                  changeValue("conditions", words);
-                }}
+                onChange={(e) => changeValue("conditions", e.target.value.split(", "))}
               />
               <Form.Text className="text-white list">
                 List your pre-existing conditions with commas as separators.
@@ -178,10 +196,7 @@ const WriteReview = () => {
           <Form.Control
             type="textbox"
             placeholder="List any reactions you had after taking the vaccine"
-            onChange={(e) => {
-              let words = e.target.value.split(", ");
-              changeValue("reactions", words);
-            }}
+            onChange={(e) => changeValue("reactions",  e.target.value.split(", ")) }
           />
           <Form.Text className="text-white list">
             List your reactions with commas as separators.
