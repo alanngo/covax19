@@ -1,5 +1,6 @@
 import axios from "axios";
-import {  useEffect, useState } from "react";
+import {  useEffect, useState, useReducer } from "react";
+import {indexReducer} from "./reducer"
 import 
 { 
   Spinner, 
@@ -11,12 +12,12 @@ import "./showreviews.css";
 import PageContainer from "../../components/layout/PageContainer";
 import ReviewFormCard from '../../components/layout/ReviewFormCard'
 import { companies, url } from "../../helper/constants";
-
 const ShowReviews = () => 
 {
-  const [patients, setPatients] = useState([])
   const [filtered, setFiltered]= useState([])
-  const [index, setIndex] = useState(3)
+  const [index, dispatch] = useReducer(indexReducer, 3)
+  const [patients, setPatients] = useState([])
+
   useEffect(() => 
   {
     axios.get(`${url}/reviews`).then((res) =>{
@@ -65,7 +66,7 @@ const ShowReviews = () =>
           (index>=filtered.length)?<></>:
           <button
           disabled={index>=filtered.length}
-          onClick={() =>setIndex(index+3)}>Show More</button>
+          onClick={() =>dispatch({type: 'increment'})}>Show More</button>
         }
         {
           (patients.length>0 && filtered.length<=0)?<>no reviews available</>:<></>
