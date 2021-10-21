@@ -41,7 +41,12 @@ const WriteReview = () => {
   const handleSubmit = (e) => // using upsert functionality to avoid confusion and redundancy
   {
     e.preventDefault();
-    if (invalidDate(new Date(review.date))) alert("choose a date that is not in the future or not earlier than 2021")
+    if (invalidDate(new Date(review.date))) 
+    {
+      alert("choose a date that is not in the future or not earlier than 2021")
+      return null
+    }
+
     if (invalidAge(review.age)) alert("age cannot be negative")
     else {
       axios.put(`${url}/updateReview`, review).then((res) => {
@@ -94,7 +99,7 @@ const WriteReview = () => {
             <Form.Control
               type="date"
               placeholder="Date of vaccine"
-              onChange={(e) => dispatch({ type: "age", payload: e.target.value })}
+              onChange={(e) => dispatch({ type: "date", payload: e.target.value })}
             />
             <Form.Text>Date vaccine taken (date of your latest dose)</Form.Text>
           </Col>
