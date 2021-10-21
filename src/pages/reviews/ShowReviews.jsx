@@ -13,9 +13,10 @@ import PageContainer from "../../components/layout/PageContainer";
 import ReviewFormCard from '../../components/layout/ReviewFormCard'
 import { companies, url } from "../../helper/constants";
 const ShowReviews = () => 
-{
-  const [filtered, setFiltered]= useState([])
+{ 
   const [index, dispatch] = useReducer(indexReducer, 3)
+
+  const [filtered, setFiltered]= useState([])
   const [patients, setPatients] = useState([])
 
   useEffect(() => 

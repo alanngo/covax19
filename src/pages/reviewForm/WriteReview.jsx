@@ -1,18 +1,22 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useReducer } from "react";
 import { Button, Form, Col, Spinner } from "react-bootstrap";
 import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
 import { companies, url } from "../../helper/constants";
-import { invalidAge, invalidDate, toTitle } from "../../helper/functions";
+import { invalidAge, invalidDate } from "../../helper/functions";
 import { useHistory } from "react-router-dom";
-import reviewSchema from "../../schema/review";
+import defaultReview from "../../schema/review";
+import { reviewReducer } from "./reducer";
 
 const WriteReview = () => {
+  
+  // use dispatch
+  const [review, dispatch] = useReducer(reviewReducer, defaultReview)
+
   // use state
-  const [loaded, setLoaded] = useState(false)
-  const [review, setReview] = useState(reviewSchema)
   const [countries, setCountries] = useState([])
+  const [loaded, setLoaded] = useState(false)
 
   // use memo
   const sortedCountries = useMemo(() => countries.sort((a, b) => {
@@ -50,9 +54,6 @@ const WriteReview = () => {
   };
 
 
-  const changeValue = (key, value) =>
-    setReview({ ...review, [`${key}`]: value });
-
   return (
     <PageContainer>
       <h1 className="reviewTitle">Share your post-vaccine review with us.</h1>
@@ -68,7 +69,7 @@ const WriteReview = () => {
             <Form.Control
               type="email"
               placeholder="Email*"
-              onChange={(e) => changeValue("_id", e.target.value)}
+              onChange={(e) => dispatch({ type: "_id", payload: e.target.value })}
             />
             <Form.Text className="text-white list">
               We'll never share your email with anyone else.
@@ -80,7 +81,7 @@ const WriteReview = () => {
               type="number"
               placeholder="Age"
               min={0}
-              onChange={(e) => changeValue("age", Number(e.target.value))}
+              onChange={(e) => dispatch({ type: "age", payload: e.target.value })}
             />
             <Form.Text className="text-white list">
               Age
@@ -93,7 +94,7 @@ const WriteReview = () => {
             <Form.Control
               type="date"
               placeholder="Date of vaccine"
-              onChange={(e) => changeValue("date", e.target.value)}
+              onChange={(e) => dispatch({ type: "age", payload: e.target.value })}
             />
             <Form.Text>Date vaccine taken (date of your latest dose)</Form.Text>
           </Col>
@@ -101,7 +102,7 @@ const WriteReview = () => {
           <Col>
             <Form.Control
               as="select"
-              onChange={(e) => changeValue("country", e.target.value)}
+              onChange={(e) => dispatch({ type: "country", payload: e.target.value })}
               defaultValue="United States"
             >
               {sortedCountries.map(c => (<option key={c.name.common}>{c.name.common}</option>))}
@@ -116,7 +117,7 @@ const WriteReview = () => {
             <Form.Control
               type="text"
               placeholder="State/Region/Province"
-              onChange={(e) => changeValue("region", toTitle(e.target.value))}
+              onChange={(e) => dispatch({ type: "region", payload: e.target.value })}
             />
             <Form.Text className="text-white list">
               Region
@@ -127,7 +128,7 @@ const WriteReview = () => {
             <Form.Control
               type="text"
               placeholder="City"
-              onChange={(e) => changeValue("city", toTitle(e.target.value))}
+              onChange={(e) => dispatch({ type: "city", payload: e.target.value })}
             />
             <Form.Text className="text-white list">
               City
@@ -141,7 +142,7 @@ const WriteReview = () => {
               <Form.Control
                 type="textbox"
                 placeholder="Do you have any pre-existing conditions?"
-                onChange={(e) => changeValue("conditions", e.target.value.split(", "))}
+                onChange={(e) => dispatch({ type: "conditions", payload: e.target.value })}
               />
               <Form.Text className="text-white list">
                 List your pre-existing conditions with commas as separators.
@@ -155,7 +156,7 @@ const WriteReview = () => {
             <Form.Group controlId="dropdown">
               <Form.Control
                 as="select"
-                onChange={(e) => changeValue("company", e.target.value)}
+                onChange={(e) => dispatch({ type: "company", payload: e.target.value })}
                 defaultValue="Pfizer"
               >
                 {companies.map(c => (<option key={c}>{c}</option>))}
@@ -170,7 +171,7 @@ const WriteReview = () => {
               <Form.Control
                 as="select"
                 defaultValue="no"
-                onChange={(e) => changeValue("icu", e.target.value)}>
+                onChange={(e) => dispatch({ type: "icu", payload: e.target.value })}>
                 <option>yes</option>
                 <option>no</option>
               </Form.Control>
@@ -186,7 +187,7 @@ const WriteReview = () => {
           <Form.Control
             type="textbox"
             placeholder="List any reactions you had after taking the vaccine"
-            onChange={(e) => changeValue("reactions", e.target.value.split(", "))}
+            onChange={(e) => dispatch({ type: "reactions", payload: e.target.value })}
           />
           <Form.Text className="text-white list">
             List your reactions with commas as separators.
@@ -199,7 +200,7 @@ const WriteReview = () => {
             as="textarea"
             rows={5}
             placeholder="Comments"
-            onChange={(e) => changeValue("comments", e.target.value)}
+            onChange={(e) => dispatch({ type: "comments", payload: e.target.value })}
           />
         </Form.Group>
         <div align="right">
