@@ -20,12 +20,37 @@ export const invalidDate = (date) => date.setHours(0, 0, 0, 0) > new Date().setH
  */
 export const invalidAge = (age) => age < 0
 
+const getMonth = (monthNum) =>(
+{
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5:"May", 
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec"
+})[monthNum]
+
 /**
  * 
  * @param {Date} date 
- * @returns {String}
+ * @returns {String} yyyy-mm-dd
  */
-export const parseDate = (date) => String(date).substring(0, 10)
+const parseDate = (date) => String(date).substring(0, 10) 
+
+export const beautifyDate = (date) =>
+{
+    let arrDate = parseDate(date).split("-")
+    let year = arrDate[0]
+    let month = getMonth(Number(arrDate[1]))
+    let day = arrDate[2]
+    return `${month} ${day} ${year}`
+}
 
 /**
  * 
@@ -47,6 +72,8 @@ export const hasSymptoms = (array) =>
         array.some(e => ignoreCase(e, "no")) ||
         array.some(e => ignoreCase(e, "n/a")) ||
         array.some(e => ignoreCase(e, "na")) ||
+        array.some(e => ignoreCase(e, "nope")) ||
+
         array.some(e => e === "")
     )
 
