@@ -3,7 +3,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Covexlogo from "../../assets/covex_logo.png";
 import Warning from '../../assets/warning.png'
-import { enumerate, hasSymptoms, parseDate, beautifyDate } from '../../helper/functions';
+import { enumerate, hasSymptoms, beautifyDate } from '../../helper/functions';
 import "./reviewForm.css"
 
 const ReviewFormCard = ({ data }) =>
