@@ -7,7 +7,7 @@ export const reviewReducer = (state, action) =>{
     {
         case "_id": return updateState(state, "_id", action.payload)
         case "age": return updateState(state, "age", Number(action.payload))
-        case "date": return updateState(state, "date", Date(action.payload))
+        case "date": return updateState(state, "date", action.payload)
         case "country": return updateState(state, "country", action.payload)
         case "region": return updateState(state, "region", toTitle(action.payload))
         case "city": return updateState(state, "city", toTitle(action.payload))
