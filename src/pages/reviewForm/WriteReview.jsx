@@ -1,48 +1,64 @@
-import { useState, useEffect, useMemo, useReducer } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { Button, Form, Col, Spinner } from "react-bootstrap";
 import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
-import { companies, url } from "../../helper/constants";
+import { companies, url, locationUrl } from "../../helper/constants";
 import { invalidAge, invalidDate } from "../../helper/functions";
 import { useHistory } from "react-router-dom";
 import defaultReview from "../../schema/review";
 import { reviewReducer } from "./reducer";
 
 const WriteReview = () => {
-  
+
   // use dispatch
   const [review, dispatch] = useReducer(reviewReducer, defaultReview)
 
   // use state
+
+  // get auth token
+  const [authToken, setAuthToken] = useState("")
+
+  // fetch location
   const [countries, setCountries] = useState([])
+  const [currentCountry, setCurrentCountry] = useState("Afghanistan")
+
+  const [regions, setRegions] = useState([])
+  const [currentRegion, setCurrentRegion] = useState("Badakhshan")
+
+  const [cities, setCities] = useState([])
+
+
+  // connecting to backend
   const [loaded, setLoaded] = useState(false)
 
-  // use memo
-  const sortedCountries = useMemo(() => countries.sort((a, b) => {
-    let c0 = a.name.common
-    let c1 = b.name.common
-
-    if (c0 > c1) return 1
-    if (c0 < c1) return -1
-    return 0
-  }), [countries])
 
   // use history
   const history = useHistory()
 
   // use effect
+  useEffect(() => axios.get(`${url}/`).then(res => setLoaded(res.data.loaded)), [])
+
   useEffect(() => {
-    axios.get(`${url}/`).then(res => setLoaded(res.data.loaded))
-    axios.get("https://restcountries.com/v3.1/all").then(res => setCountries(res.data))
-  }, [])
+    const authHeaders = {headers: {
+      "api-token": process.env.REACT_APP_LOCATION_API_TOKEN,
+      "user-email": process.env.REACT_APP_LOCATION_API_EMAIL
+    }}
+    axios.get(`${locationUrl}/getaccesstoken`, authHeaders).then(res => setAuthToken(res.data.auth_token)).then(() =>
+    {
+      const locationHeaders = {headers: {"Authorization": `Bearer ${authToken}`}}
+      axios.get(`${locationUrl}/countries`, locationHeaders).then(res => setCountries(res.data))
+      axios.get(`${locationUrl}/states/${currentCountry}`, locationHeaders).then(res => setRegions(res.data)).catch(err => console.log(err))
+      axios.get(`${locationUrl}/cities/${currentRegion}`, locationHeaders).then(res => setCities(res.data)).catch(err => console.log(err))
+    }).catch(err =>console.log(err))
+
+  }, [authToken, currentCountry, currentRegion])
 
   //misc
   const handleSubmit = (e) => // using upsert functionality to avoid confusion and redundancy
   {
     e.preventDefault();
-    if (invalidDate(new Date(review.date))) 
-    {
+    if (invalidDate(new Date(review.date))) {
       alert("choose a date that is not in the future or not earlier than 2021")
       return null
     }
@@ -58,6 +74,8 @@ const WriteReview = () => {
     }
   };
 
+  // console.log(currentCountry)
+  // console.log(currentRegion)
 
   return (
     <PageContainer>
@@ -108,9 +126,10 @@ const WriteReview = () => {
             <Form.Control
               as="select"
               onChange={(e) => dispatch({ type: "country", payload: e.target.value })}
+              onClick={(e) => setCurrentCountry(e.target.value)}
               defaultValue="United States"
             >
-              {sortedCountries.map(c => (<option key={c.name.common}>{c.name.common}</option>))}
+              {countries.map(c => (<option key={c.country_name}>{c.country_name}</option>))}
 
             </Form.Control>
             <Form.Text>Country</Form.Text>
@@ -120,24 +139,25 @@ const WriteReview = () => {
         <Form.Row className="mt-4">
           <Col>
             <Form.Control
-              type="text"
-              placeholder="State/Region/Province"
+              as="select"
               onChange={(e) => dispatch({ type: "region", payload: e.target.value })}
-            />
-            <Form.Text className="text-white list">
-              Region
-            </Form.Text>
+              onClick={(e) => setCurrentRegion(e.target.value)}
+            >
+              {regions.map(c => (<option key={c.state_name}>{c.state_name}</option>))}
+
+            </Form.Control>
+            <Form.Text>Region</Form.Text>
           </Col>
 
           <Col>
             <Form.Control
-              type="text"
-              placeholder="City"
+              as="select"
               onChange={(e) => dispatch({ type: "city", payload: e.target.value })}
-            />
-            <Form.Text className="text-white list">
-              City
-            </Form.Text>
+            >
+              {cities.map(c => (<option key={c.city_name}>{c.city_name}</option>))}
+
+            </Form.Control>
+            <Form.Text>City</Form.Text>
           </Col>
         </Form.Row>
 
