@@ -11,7 +11,7 @@ import { reviewReducer } from "./reducer";
 
 const WriteReview = () => {
 
-  // use dispatch
+  // use reducer
   const [review, dispatch] = useReducer(reviewReducer, defaultReview)
 
   // use state
@@ -40,18 +40,19 @@ const WriteReview = () => {
   useEffect(() => axios.get(`${url}/`).then(res => setLoaded(res.data.loaded)), [])
 
   useEffect(() => {
-    const authHeaders = {headers: {
-      "api-token": process.env.REACT_APP_LOCATION_API_TOKEN,
-      "user-email": process.env.REACT_APP_LOCATION_API_EMAIL
-    }}
-    axios.get(`${locationUrl}/getaccesstoken`, authHeaders).then(res => setAuthToken(res.data.auth_token)).then(() =>
-    {
-      const locationHeaders = {headers: {"Authorization": `Bearer ${authToken}`}}
-      axios.get(`${locationUrl}/countries`, locationHeaders).then(res => setCountries(res.data))
-      axios.get(`${locationUrl}/states/${currentCountry}`, locationHeaders).then(res => setRegions(res.data)).catch(err => console.log(err))
-      axios.get(`${locationUrl}/cities/${currentRegion}`, locationHeaders).then(res => setCities(res.data)).catch(err => console.log(err))
-    }).catch(err =>console.log(err))
-
+    const authHeaders = {
+      headers: {
+        "api-token": process.env.REACT_APP_LOCATION_API_TOKEN,
+        "user-email": process.env.REACT_APP_LOCATION_API_EMAIL
+      }
+    }
+    axios.get(`${locationUrl}/getaccesstoken`, authHeaders).then(res => setAuthToken(res.data.auth_token)).then(() => {
+      const locationHeaders = { headers: { "Authorization": `Bearer ${authToken}` } }
+      axios.get(`${locationUrl}/countries`, locationHeaders).then(res => setCountries(res.data)).catch(() => console.log("refetching countries"))
+      axios.get(`${locationUrl}/states/${currentCountry}`, locationHeaders).then(res => setRegions(res.data)).catch(() => console.log("refetching states"))
+      axios.get(`${locationUrl}/cities/${currentRegion}`, locationHeaders).then(res => setCities(res.data)).catch(() => console.log("refetching cities"))
+    }).catch(err => console.log(err))
+    return () =>console.log("fetched location info")
   }, [authToken, currentCountry, currentRegion])
 
   //misc
@@ -74,8 +75,6 @@ const WriteReview = () => {
     }
   };
 
-  // console.log(currentCountry)
-  // console.log(currentRegion)
 
   return (
     <PageContainer>
