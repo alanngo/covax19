@@ -1,33 +1,17 @@
 import { Dropdown } from "react-bootstrap"
-import { companies } from "../../helper/constants"
 
-const CompaniesDropdown = ({singleSelect, allSelect}) =>
+const CompaniesDropdown = ({ children = (<></>), allSelect = () => { } }) =>
 (
-    <Dropdown>
-          <Dropdown.Toggle variant="dark" id="dropdown-basic">
-            Filter By Company
-          </Dropdown.Toggle>
+  <Dropdown>
+    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+      Filter By Company
+    </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item onSelect={
-                allSelect
-                // () => setFiltered(patients)
-                }>All</Dropdown.Item>
-            <Dropdown.Divider />
-            {
-              companies.map(company =>
-              (
-                <Dropdown.Item
-                  key={company}
-                  onSelect={
-                      singleSelect
-                    //   () => setFiltered(patients.filter(p => p.company === company))
-                      }>
-                  {company}
-                </Dropdown.Item>
-              ))
-            }
-          </Dropdown.Menu>
-        </Dropdown>
+    <Dropdown.Menu>
+      <Dropdown.Item onSelect={allSelect}>All</Dropdown.Item>
+      <Dropdown.Divider />
+      {children}
+    </Dropdown.Menu>
+  </Dropdown>
 )
 export default CompaniesDropdown

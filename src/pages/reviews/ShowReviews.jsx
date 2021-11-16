@@ -2,15 +2,14 @@ import axios from "axios";
 import { useEffect, useState, useReducer } from "react";
 import { indexReducer } from "./reducer"
 import {
-Spinner,
-Dropdown,
-// ButtonGroup, 
-// DropdownButton
+  Spinner,
+  Dropdown
 } from "react-bootstrap";
 import "./showreviews.css";
 import PageContainer from "../../components/layout/PageContainer";
 import ReviewFormCard from '../../components/layout/ReviewFormCard'
 import { companies, url } from "../../helper/constants";
+import CompaniesDropdown from "../../components/dropdown/CompaniesDropdown";
 const ShowReviews = () => {
   const [index, dispatch] = useReducer(indexReducer, 3)
 
@@ -37,32 +36,26 @@ const ShowReviews = () => {
         allSelect={() => setFiltered(patients)}
         singleSelect = {() => setFiltered(patients.filter(p => p.company === company))}
         /> */}
-        <Dropdown>
-          <Dropdown.Toggle variant="dark" id="dropdown-basic">
-            Filter By Company
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item onSelect={() => setFiltered(patients)}>All</Dropdown.Item>
-            <Dropdown.Divider />
-            {
-              companies.map(company =>
-              (
-                <Dropdown.Item
-                  key={company}
-                  onSelect={() => setFiltered(patients.filter(p => p.company === company))}>
-                  {company}
-                </Dropdown.Item>
-              ))
-            }
-          </Dropdown.Menu>
-        </Dropdown>
-
-        {(patients.length <= 0 ? <Spinner animation="border" variant="secondary" /> :
-          patients && filtered.slice(0, index).map((patient) =>
+        <CompaniesDropdown allSelect= {() => setFiltered(patients)}>
+        {
+          companies.map(company =>
           (
-            <ReviewFormCard data={patient} key={patient._id} />
-          )))}
+            <Dropdown.Item
+              key={company}
+              onSelect={() => setFiltered(patients.filter(p => p.company === company))}>
+              {company}
+            </Dropdown.Item>
+          ))
+        }
+        </CompaniesDropdown>
+
+        {
+          (patients.length <= 0 ? <Spinner animation="border" variant="secondary" /> :
+            patients && filtered.slice(0, index).map((patient) =>
+            (
+              <ReviewFormCard data={patient} key={patient._id} />
+            )))
+        }
         <div align="center">
           {
             (index >= filtered.length) ? <></> :
@@ -75,7 +68,7 @@ const ShowReviews = () => {
           }
 
         </div>
-      </PageContainer>
+      </PageContainer >
 
     </>
   );
