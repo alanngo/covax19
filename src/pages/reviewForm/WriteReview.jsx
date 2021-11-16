@@ -16,21 +16,16 @@ const WriteReview = () => {
 
   // use state
 
-  // get auth token
-  const [authToken, setAuthToken] = useState("")
+  const [authToken, setAuthToken] = useState("")   // get auth token
 
   // fetch location
   const [countries, setCountries] = useState([])
-  const [currentCountry, setCurrentCountry] = useState("Afghanistan")
-
+  const [currentCountry, setCurrentCountry] = useState(defaultReview.country)
   const [regions, setRegions] = useState([])
-  const [currentRegion, setCurrentRegion] = useState("Badakhshan")
-
+  const [currentRegion, setCurrentRegion] = useState(defaultReview.region)
   const [cities, setCities] = useState([])
 
-
-  // connecting to backend
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false)   // connecting to backend
 
 
   // use history
@@ -47,12 +42,15 @@ const WriteReview = () => {
       }
     }
     axios.get(`${locationUrl}/getaccesstoken`, authHeaders).then(res => setAuthToken(res.data.auth_token)).then(() => {
-      const locationHeaders = { headers: { "Authorization": `Bearer ${authToken}` } }
+      const locationHeaders = 
+      {
+        headers: { "Authorization": `Bearer ${authToken}` }
+      }
       axios.get(`${locationUrl}/countries`, locationHeaders).then(res => setCountries(res.data)).catch(() => console.log("refetching countries"))
       axios.get(`${locationUrl}/states/${currentCountry}`, locationHeaders).then(res => setRegions(res.data)).catch(() => console.log("refetching states"))
       axios.get(`${locationUrl}/cities/${currentRegion}`, locationHeaders).then(res => setCities(res.data)).catch(() => console.log("refetching cities"))
     }).catch(err => console.log(err))
-    return () =>console.log("fetched location info")
+    return () => console.log("fetched location info")
   }, [authToken, currentCountry, currentRegion])
 
   //misc
