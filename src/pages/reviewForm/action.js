@@ -1,0 +1,11 @@
+export const EMAIL = { type: "_id" }
+export const AGE = { type: "_age" }
+export const DATE = { type: "date" }
+export const COUNTRY = { type: "country" }
+export const REGION = { type: "region" }
+export const CITY = { type: "city" }
+export const CONDITIONS = { type: "conditions" }
+export const COMPANY = { type: "company" }
+export const ICU = { type: "icu" }
+export const REACTIONS = { type: "reactions" }
+export const COMMENTS = { type: "comments" }

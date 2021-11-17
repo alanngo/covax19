@@ -8,6 +8,7 @@ import { invalidAge, invalidDate } from "../../helper/functions";
 import { useHistory } from "react-router-dom";
 import defaultReview from "../../schema/review";
 import { reviewReducer } from "./reducer";
+import { AGE, EMAIL, DATE, COUNTRY, REGION, CITY, CONDITIONS, COMPANY, ICU, REACTIONS, COMMENTS } from "./action";
 
 const WriteReview = () => {
 
@@ -20,9 +21,9 @@ const WriteReview = () => {
 
   // fetch location
   const [countries, setCountries] = useState([])
-  const [currentCountry, setCurrentCountry] = useState(defaultReview.country)
+  const [currentCountry, setCurrentCountry] = useState("")
   const [regions, setRegions] = useState([])
-  const [currentRegion, setCurrentRegion] = useState(defaultReview.region)
+  const [currentRegion, setCurrentRegion] = useState("")
   const [cities, setCities] = useState([])
 
   const [loaded, setLoaded] = useState(false)   // connecting to backend
@@ -42,7 +43,7 @@ const WriteReview = () => {
       }
     }
     axios.get(`${locationUrl}/getaccesstoken`, authHeaders).then(res => setAuthToken(res.data.auth_token)).then(() => {
-      const locationHeaders = 
+      const locationHeaders =
       {
         headers: { "Authorization": `Bearer ${authToken}` }
       }
@@ -74,6 +75,17 @@ const WriteReview = () => {
   };
 
 
+  const handleCountry = (e) => {
+    const entry = e.target.value
+    dispatch({ ...COUNTRY, payload: entry })
+    setCurrentCountry(entry)
+  }
+
+  const handleRegion = (e) => {
+    const entry = e.target.value
+    dispatch({ ...REGION, payload: entry })
+    setCurrentRegion(entry)
+  }
   return (
     <PageContainer>
       <h1 className="reviewTitle">Share your post-vaccine review with us.</h1>
@@ -89,7 +101,7 @@ const WriteReview = () => {
             <Form.Control
               type="email"
               placeholder="Email*"
-              onChange={(e) => dispatch({ type: "_id", payload: e.target.value })}
+              onChange={(e) => dispatch({ ...EMAIL, payload: e.target.value })}
             />
             <Form.Text className="text-white list">
               We'll never share your email with anyone else.
@@ -101,7 +113,7 @@ const WriteReview = () => {
               type="number"
               placeholder="Age"
               min={0}
-              onChange={(e) => dispatch({ type: "age", payload: e.target.value })}
+              onChange={(e) => dispatch({ ...AGE, payload: e.target.value })}
             />
             <Form.Text className="text-white list">
               Age
@@ -114,7 +126,7 @@ const WriteReview = () => {
             <Form.Control
               type="date"
               placeholder="Date of vaccine"
-              onChange={(e) => dispatch({ type: "date", payload: e.target.value })}
+              onChange={(e) => dispatch({ ...DATE, payload: e.target.value })}
             />
             <Form.Text>Date vaccine taken (date of your latest dose)</Form.Text>
           </Col>
@@ -122,10 +134,8 @@ const WriteReview = () => {
           <Col>
             <Form.Control
               as="select"
-              onChange={(e) => dispatch({ type: "country", payload: e.target.value })}
-              onClick={(e) => setCurrentCountry(e.target.value)}
-              defaultValue="United States"
-            >
+              onClick={handleCountry}
+              onChange={handleCountry}>
               {countries.map(c => (<option key={c.country_name}>{c.country_name}</option>))}
 
             </Form.Control>
@@ -136,10 +146,10 @@ const WriteReview = () => {
         <Form.Row className="mt-4">
           <Col>
             <Form.Control
+              disabled={!currentCountry}
               as="select"
-              onChange={(e) => dispatch({ type: "region", payload: e.target.value })}
-              onClick={(e) => setCurrentRegion(e.target.value)}
-            >
+              onClick={handleRegion}
+              onChange={handleRegion} >
               {regions.map(c => (<option key={c.state_name}>{c.state_name}</option>))}
 
             </Form.Control>
@@ -149,8 +159,8 @@ const WriteReview = () => {
           <Col>
             <Form.Control
               as="select"
-              onChange={(e) => dispatch({ type: "city", payload: e.target.value })}
-            >
+              disabled={!currentRegion}
+              onChange={(e) => dispatch({ ...CITY, payload: e.target.value })}>
               {cities.map(c => (<option key={c.city_name}>{c.city_name}</option>))}
 
             </Form.Control>
@@ -164,7 +174,7 @@ const WriteReview = () => {
               <Form.Control
                 type="textbox"
                 placeholder="Do you have any pre-existing conditions?"
-                onChange={(e) => dispatch({ type: "conditions", payload: e.target.value })}
+                onChange={(e) => dispatch({ ...CONDITIONS, payload: e.target.value })}
               />
               <Form.Text className="text-white list">
                 List your pre-existing conditions with commas as separators.
@@ -178,7 +188,7 @@ const WriteReview = () => {
             <Form.Group controlId="dropdown">
               <Form.Control
                 as="select"
-                onChange={(e) => dispatch({ type: "company", payload: e.target.value })}
+                onChange={(e) => dispatch({ ...COMPANY, payload: e.target.value })}
                 defaultValue="Pfizer"
               >
                 {companies.map(c => (<option key={c}>{c}</option>))}
@@ -193,7 +203,7 @@ const WriteReview = () => {
               <Form.Control
                 as="select"
                 defaultValue="no"
-                onChange={(e) => dispatch({ type: "icu", payload: e.target.value })}>
+                onChange={(e) => dispatch({ ...ICU, payload: e.target.value })}>
                 <option>yes</option>
                 <option>no</option>
               </Form.Control>
@@ -209,7 +219,7 @@ const WriteReview = () => {
           <Form.Control
             type="textbox"
             placeholder="List any reactions you had after taking the vaccine"
-            onChange={(e) => dispatch({ type: "reactions", payload: e.target.value })}
+            onChange={(e) => dispatch({ ...REACTIONS, payload: e.target.value })}
           />
           <Form.Text className="text-white list">
             List your reactions with commas as separators.
@@ -222,7 +232,7 @@ const WriteReview = () => {
             as="textarea"
             rows={5}
             placeholder="Comments"
-            onChange={(e) => dispatch({ type: "comments", payload: e.target.value })}
+            onChange={(e) => dispatch({ ...COMMENTS, payload: e.target.value })}
           />
         </Form.Group>
         <div align="right">
