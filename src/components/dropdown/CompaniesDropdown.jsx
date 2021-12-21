@@ -1,10 +1,19 @@
 import { Dropdown } from "react-bootstrap"
 
-const CompaniesDropdown = ({ children = (<></>), allSelect = () => { } }) =>
+const CompaniesDropdown = 
+(
+  {
+    title = "Filter By Company",
+    children = (<></>),
+    allSelect = () => { }
+  }
+) =>
 (
   <Dropdown>
-    <Dropdown.Toggle variant="dark" id="dropdown-basic">
-      Filter By Company
+    <Dropdown.Toggle
+      variant="dark"
+      id="dropdown-basic">
+      {title}
     </Dropdown.Toggle>
 
     <Dropdown.Menu>

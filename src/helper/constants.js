@@ -3,7 +3,6 @@ import Hanniya from "../assets/haaniya.jpg"
 import Alan from "../assets/alan.jpg"
 import Nathan from "../assets/nathan.png"
 import Olga from "../assets/olga.jpg"
-import { lazy } from "react"
 
 export const url = process.env.REACT_APP_BACKEND_URL
 export const locationUrl = process.env.REACT_APP_LOCATIONS_URL
@@ -78,11 +77,3 @@ export const team =
         }
     ]
 
-export const routes = [
-    { id: 0, path: "/test", component: lazy(() => import("../pages/Test")) },
-    { id: 1, path: "/faq", component: lazy(() => import("../pages/faq/Faq")) },
-    { id: 2, path: "/writeReview", component: lazy(() => import("../pages/reviewForm/WriteReview")) },
-    { id: 3, path: "/showReviews", component: lazy(() => import("../pages/reviews/ShowReviews")) },
-    { id: 4, path: "/about", component: lazy(() => import("../pages/about/About")) },
-    { id: 5, path: "/", component: lazy(() => import("../pages/landingPage/LandingPage")) },
-]

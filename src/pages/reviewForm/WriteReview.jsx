@@ -9,9 +9,10 @@ import { useHistory } from "react-router-dom";
 import defaultReview from "../../schema/review";
 import { reviewReducer } from "./reducer";
 import { AGE, EMAIL, DATE, COUNTRY, REGION, CITY, CONDITIONS, COMPANY, ICU, REACTIONS, COMMENTS } from "./action";
+import { RenderIf } from "@alanngo/custom-components/dist"
 
-const WriteReview = () => {
-
+const WriteReview = () => // wirte review 
+{
   // use reducer
   const [review, dispatch] = useReducer(reviewReducer, defaultReview)
 
@@ -33,7 +34,7 @@ const WriteReview = () => {
   const history = useHistory()
 
   // use effect
-  useEffect(() => axios.get(`${url}/`).then(res => setLoaded(res.data.loaded)), [])
+  useEffect(() => axios.get(`${url}/`).then(({ data }) => setLoaded(data.loaded)), [])
 
   useEffect(() => {
     const authHeaders = {
@@ -42,16 +43,17 @@ const WriteReview = () => {
         "user-email": process.env.REACT_APP_LOCATION_API_EMAIL
       }
     }
-    axios.get(`${locationUrl}/getaccesstoken`, authHeaders).then(res => setAuthToken(res.data.auth_token)).then(() => {
+    const source = axios.CancelToken.source()
+    axios.get(`${locationUrl}/getaccesstoken`, authHeaders).then(({ data }) => setAuthToken(data.auth_token)).then(() => {
       const locationHeaders =
       {
         headers: { "Authorization": `Bearer ${authToken}` }
       }
-      axios.get(`${locationUrl}/countries`, locationHeaders).then(res => setCountries(res.data)).catch(() => console.log("refetching countries"))
-      axios.get(`${locationUrl}/states/${currentCountry}`, locationHeaders).then(res => setRegions(res.data)).catch(() => console.log("refetching states"))
-      axios.get(`${locationUrl}/cities/${currentRegion}`, locationHeaders).then(res => setCities(res.data)).catch(() => console.log("refetching cities"))
+      axios.get(`${locationUrl}/countries`, locationHeaders).then(({ data }) => setCountries(data)).catch(() => console.log("refetching countries"))
+      axios.get(`${locationUrl}/states/${currentCountry}`, locationHeaders).then(({ data }) => setRegions(data)).catch(() => console.log("refetching states"))
+      axios.get(`${locationUrl}/cities/${currentRegion}`, locationHeaders).then(({ data }) => setCities(data)).catch(() => console.log("refetching cities"))
     }).catch(err => console.log(err))
-    return () => console.log("fetched location info")
+    return () => source.cancel()
   }, [authToken, currentCountry, currentRegion])
 
   //misc
@@ -65,8 +67,8 @@ const WriteReview = () => {
 
     if (invalidAge(review.age)) alert("age cannot be negative")
     else {
-      axios.put(`${url}/updateReview`, review).then((res) => {
-        const result = res.data;
+      axios.put(`${url}/updateReview`, review).then(({ data }) => {
+        const result = data;
         if (result.hasOwnProperty("err")) alert(result.err);
         else if (result.hasOwnProperty("error")) alert(result.error);
         else history.push("/showReviews")
@@ -101,11 +103,8 @@ const WriteReview = () => {
             <Form.Control
               type="email"
               placeholder="Email*"
-              onChange={(e) => dispatch({ ...EMAIL, payload: e.target.value })}
-            />
-            <Form.Text className="text-white list">
-              We'll never share your email with anyone else.
-            </Form.Text>
+              onChange={(e) => dispatch({ ...EMAIL, payload: e.target.value })} />
+            <Form.Text className="text-white list">We'll never share your email with anyone else.</Form.Text>
           </Col>
 
           <Col>
@@ -113,11 +112,8 @@ const WriteReview = () => {
               type="number"
               placeholder="Age"
               min={0}
-              onChange={(e) => dispatch({ ...AGE, payload: e.target.value })}
-            />
-            <Form.Text className="text-white list">
-              Age
-            </Form.Text>
+              onChange={(e) => dispatch({ ...AGE, payload: e.target.value })} />
+            <Form.Text className="text-white list">Age</Form.Text>
           </Col>
         </Form.Row>
 
@@ -126,8 +122,7 @@ const WriteReview = () => {
             <Form.Control
               type="date"
               placeholder="Date of vaccine"
-              onChange={(e) => dispatch({ ...DATE, payload: e.target.value })}
-            />
+              onChange={(e) => dispatch({ ...DATE, payload: e.target.value })} />
             <Form.Text>Date vaccine taken (date of your latest dose)</Form.Text>
           </Col>
 
@@ -137,7 +132,6 @@ const WriteReview = () => {
               onClick={handleCountry}
               onChange={handleCountry}>
               {countries.map(c => (<option key={c.country_name}>{c.country_name}</option>))}
-
             </Form.Control>
             <Form.Text>Country</Form.Text>
           </Col>
@@ -151,7 +145,6 @@ const WriteReview = () => {
               onClick={handleRegion}
               onChange={handleRegion} >
               {regions.map(c => (<option key={c.state_name}>{c.state_name}</option>))}
-
             </Form.Control>
             <Form.Text>Region</Form.Text>
           </Col>
@@ -162,7 +155,6 @@ const WriteReview = () => {
               disabled={!currentRegion}
               onChange={(e) => dispatch({ ...CITY, payload: e.target.value })}>
               {cities.map(c => (<option key={c.city_name}>{c.city_name}</option>))}
-
             </Form.Control>
             <Form.Text>City</Form.Text>
           </Col>
@@ -174,8 +166,7 @@ const WriteReview = () => {
               <Form.Control
                 type="textbox"
                 placeholder="Do you have any pre-existing conditions?"
-                onChange={(e) => dispatch({ ...CONDITIONS, payload: e.target.value })}
-              />
+                onChange={(e) => dispatch({ ...CONDITIONS, payload: e.target.value })} />
               <Form.Text className="text-white list">
                 List your pre-existing conditions with commas as separators.
               </Form.Text>
@@ -189,8 +180,7 @@ const WriteReview = () => {
               <Form.Control
                 as="select"
                 onChange={(e) => dispatch({ ...COMPANY, payload: e.target.value })}
-                defaultValue="Pfizer"
-              >
+                defaultValue="Pfizer">
                 {companies.map(c => (<option key={c}>{c}</option>))}
 
               </Form.Control>
@@ -210,7 +200,6 @@ const WriteReview = () => {
               <Form.Text>
                 Have you been hospitalized because of the vaccine?
               </Form.Text>
-
             </Form.Group>
           </Col>
         </Form.Row>
@@ -219,35 +208,32 @@ const WriteReview = () => {
           <Form.Control
             type="textbox"
             placeholder="List any reactions you had after taking the vaccine"
-            onChange={(e) => dispatch({ ...REACTIONS, payload: e.target.value })}
-          />
+            onChange={(e) => dispatch({ ...REACTIONS, payload: e.target.value })} />
           <Form.Text className="text-white list">
             List your reactions with commas as separators.
           </Form.Text>
         </Form.Group>
-
 
         <Form.Group controlId="controlTextarea" className="mt-4">
           <Form.Control
             as="textarea"
             rows={5}
             placeholder="Comments"
-            onChange={(e) => dispatch({ ...COMMENTS, payload: e.target.value })}
-          />
+            onChange={(e) => dispatch({ ...COMMENTS, payload: e.target.value })} />
         </Form.Group>
         <div align="right">
-          {
-            (loaded) ?
-              <>
-                <Button className="submit" type="submit" onClick={handleSubmit}>Submit Review</Button>
-              </> :
+          <RenderIf
+            condition={loaded}
+            fallback=
+            {
               <>
                 <p>connecting to server...</p>
                 <Spinner animation="border" variant="secondary" />
               </>
-          }
+            }>
+            <Button className="submit" type="submit" onClick={handleSubmit}>Submit Review</Button>
+          </RenderIf>
         </div>
-
       </Form>
     </PageContainer>
   );

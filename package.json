@@ -3,27 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@alanngo/custom-components": "^1.2.0",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "axios": "^0.21.3",
     "bootstrap": "^4.6.0",
     "bootswatch": "^4.6.0",
-    "node-sass": "4.14.1",
+    "node-sass": "7.0.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-radio-group": "^3.0.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1",
-    "web-vitals": "^0.2.4",
+    "react-scripts": "^5.0.0",
+    "web-vitals": "^2.1.2",
     "yeetcode": "^2.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clean": "rm -rf node_modules package-lock.json yarn.lock",
+    "postclean": "yarn install"
   },
   "eslintConfig": {
     "extends": [
