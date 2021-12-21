@@ -1,6 +1,4 @@
-import { toTitle } from "../../helper/functions"
-
-const updateState = (obj, key, value) =>({ ...obj, [`${key}`]: value })
+import { toTitle, updateState} from "../../helper/functions"
 
 export const reviewReducer = (state, action) =>{
     switch (action.type)
@@ -8,7 +6,7 @@ export const reviewReducer = (state, action) =>{
         case "_id": return updateState(state, "_id", action.payload)
         case "age": return updateState(state, "age", Number(action.payload))
         case "date": return updateState(state, "date", action.payload)
-        case "country": return updateState(state, "country", action.payload)
+        case "country": return updateState(state, "country", toTitle(action.payload))
         case "region": return updateState(state, "region", toTitle(action.payload))
         case "city": return updateState(state, "city", toTitle(action.payload))
         case "conditions": return updateState(state, "conditions", String(action.payload).split(", "))

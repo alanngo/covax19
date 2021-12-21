@@ -1,1 +1,1 @@
-export const INC = {type: "increment"}
+export const INC = (value) => ({ type: "increment", payload: value })

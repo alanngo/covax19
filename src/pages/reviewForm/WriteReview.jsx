@@ -79,13 +79,13 @@ const WriteReview = () => // wirte review
 
   const handleCountry = (e) => {
     const entry = e.target.value
-    dispatch({ ...COUNTRY, payload: entry })
+    dispatch(COUNTRY(entry))
     setCurrentCountry(entry)
   }
 
   const handleRegion = (e) => {
     const entry = e.target.value
-    dispatch({ ...REGION, payload: entry })
+    dispatch(REGION(entry))
     setCurrentRegion(entry)
   }
   return (
@@ -103,7 +103,7 @@ const WriteReview = () => // wirte review
             <Form.Control
               type="email"
               placeholder="Email*"
-              onChange={(e) => dispatch({ ...EMAIL, payload: e.target.value })} />
+              onChange={(e) => dispatch(EMAIL(e.target.value))} />
             <Form.Text className="text-white list">We'll never share your email with anyone else.</Form.Text>
           </Col>
 
@@ -112,7 +112,7 @@ const WriteReview = () => // wirte review
               type="number"
               placeholder="Age"
               min={0}
-              onChange={(e) => dispatch({ ...AGE, payload: e.target.value })} />
+              onChange={(e) => dispatch(AGE(e.target.value))} />
             <Form.Text className="text-white list">Age</Form.Text>
           </Col>
         </Form.Row>
@@ -122,7 +122,7 @@ const WriteReview = () => // wirte review
             <Form.Control
               type="date"
               placeholder="Date of vaccine"
-              onChange={(e) => dispatch({ ...DATE, payload: e.target.value })} />
+              onChange={(e) => dispatch(DATE(e.target.value))} />
             <Form.Text>Date vaccine taken (date of your latest dose)</Form.Text>
           </Col>
 
@@ -153,7 +153,7 @@ const WriteReview = () => // wirte review
             <Form.Control
               as="select"
               disabled={!currentRegion}
-              onChange={(e) => dispatch({ ...CITY, payload: e.target.value })}>
+              onChange={(e) => dispatch(CITY(e.target.value))}>
               {cities.map(c => (<option key={c.city_name}>{c.city_name}</option>))}
             </Form.Control>
             <Form.Text>City</Form.Text>
@@ -166,7 +166,7 @@ const WriteReview = () => // wirte review
               <Form.Control
                 type="textbox"
                 placeholder="Do you have any pre-existing conditions?"
-                onChange={(e) => dispatch({ ...CONDITIONS, payload: e.target.value })} />
+                onChange={(e) => dispatch(CONDITIONS(e.target.value))} />
               <Form.Text className="text-white list">
                 List your pre-existing conditions with commas as separators.
               </Form.Text>
@@ -179,7 +179,7 @@ const WriteReview = () => // wirte review
             <Form.Group controlId="dropdown">
               <Form.Control
                 as="select"
-                onChange={(e) => dispatch({ ...COMPANY, payload: e.target.value })}
+                onChange={(e) => dispatch(COMPANY(e.target.value))}
                 defaultValue="Pfizer">
                 {companies.map(c => (<option key={c}>{c}</option>))}
 
@@ -193,7 +193,7 @@ const WriteReview = () => // wirte review
               <Form.Control
                 as="select"
                 defaultValue="no"
-                onChange={(e) => dispatch({ ...ICU, payload: e.target.value })}>
+                onChange={(e) => dispatch(ICU(e.target.value))}>
                 <option>yes</option>
                 <option>no</option>
               </Form.Control>
@@ -208,7 +208,7 @@ const WriteReview = () => // wirte review
           <Form.Control
             type="textbox"
             placeholder="List any reactions you had after taking the vaccine"
-            onChange={(e) => dispatch({ ...REACTIONS, payload: e.target.value })} />
+            onChange={(e) => dispatch(REACTIONS(e.target.value))} />
           <Form.Text className="text-white list">
             List your reactions with commas as separators.
           </Form.Text>
@@ -219,7 +219,7 @@ const WriteReview = () => // wirte review
             as="textarea"
             rows={5}
             placeholder="Comments"
-            onChange={(e) => dispatch({ ...COMMENTS, payload: e.target.value })} />
+            onChange={(e) => dispatch(COMMENTS(e.target.value))} />
         </Form.Group>
         <div align="right">
           <RenderIf

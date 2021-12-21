@@ -20,31 +20,30 @@ export const invalidDate = (date) => date.setHours(0, 0, 0, 0) > new Date().setH
  */
 export const invalidAge = (age) => age < 0
 
-const getMonth = (monthNum) =>(
-{
-    1: "Jan",
-    2: "Feb",
-    3: "Mar",
-    4: "Apr",
-    5:"May", 
-    6: "Jun",
-    7: "Jul",
-    8: "Aug",
-    9: "Sep",
-    10: "Oct",
-    11: "Nov",
-    12: "Dec"
-})[monthNum]
+const getMonth = (monthNum) =>
+    ({
+        1: "Jan",
+        2: "Feb",
+        3: "Mar",
+        4: "Apr",
+        5: "May",
+        6: "Jun",
+        7: "Jul",
+        8: "Aug",
+        9: "Sep",
+        10: "Oct",
+        11: "Nov",
+        12: "Dec"
+    })[monthNum]
 
 /**
  * 
  * @param {Date} date 
  * @returns {String} yyyy-mm-dd
  */
-const parseDate = (date) => String(date).substring(0, 10) 
+const parseDate = (date) => String(date).substring(0, 10)
 
-export const beautifyDate = (date) =>
-{
+export const beautifyDate = (date) => {
     let arrDate = parseDate(date).split("-")
     let year = arrDate[0]
     let month = getMonth(Number(arrDate[1]))
@@ -82,5 +81,14 @@ export const hasSymptoms = (array) =>
  * @param {string} myString 
  * @returns {string}
  */
-export const toTitle = (myString) => myString.replace( /\w\S*/g, 
-    (txt) =>txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+export const toTitle = (myString) => myString.replace(/\w\S*/g,
+    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+
+/**
+ * 
+ * @param {Object} obj 
+ * @param {string} key 
+ * @param {any} value 
+ * @returns 
+ */
+export const updateState = (obj, key, value) =>({ ...obj, [`${key}`]: value })

@@ -1,11 +1,11 @@
-export const EMAIL = { type: "_id" }
-export const AGE = { type: "_age" }
-export const DATE = { type: "date" }
-export const COUNTRY = { type: "country" }
-export const REGION = { type: "region" }
-export const CITY = { type: "city" }
-export const CONDITIONS = { type: "conditions" }
-export const COMPANY = { type: "company" }
-export const ICU = { type: "icu" }
-export const REACTIONS = { type: "reactions" }
-export const COMMENTS = { type: "comments" }
+export const EMAIL = (value) => ({ type: "_id", payload: value })
+export const AGE = (value) => ({ type: "age", payload: value })
+export const DATE = (value) => ({ type: "date", payload: value })
+export const COUNTRY = (value) => ({ type: "country", payload: value })
+export const REGION = (value) => ({ type: "region", payload: value })
+export const CITY = (value) => ({ type: "city", payload: value })
+export const CONDITIONS = (value) => ({ type: "conditions", payload: value })
+export const COMPANY = (value) => ({ type: "company", payload: value })
+export const ICU = (value) => ({ type: "icu", payload: value })
+export const REACTIONS = (value) => ({ type: "reactions", payload: value })
+export const COMMENTS = (value) => ({ type: "comments", payload: value })
