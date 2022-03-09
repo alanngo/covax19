@@ -7,13 +7,7 @@ const App = () =>
     <Router>
       <Switch>
         {
-          routes.map(r =>
-          (
-            <Route
-              key={r.id}
-              path={r.path}
-              component={r.component} />
-          ))
+          routes.map(r => (<Route key={r.id} path={r.path} component={r.component} />))
         }
       </Switch>
     </Router>

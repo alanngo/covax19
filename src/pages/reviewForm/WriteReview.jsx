@@ -3,7 +3,7 @@ import { Button, Form, Col, Spinner } from "react-bootstrap";
 import "./writereview.css";
 import PageContainer from "../../components/layout/PageContainer";
 import axios from "axios";
-import { companies, url, locationUrl } from "../../helper/constants";
+import { companies, url, locationUrl, COMMENT_LIMIT, LIMIT } from "../../helper/constants";
 import { invalidAge, invalidDate } from "../../helper/functions";
 import { useHistory } from "react-router-dom";
 import defaultReview from "../../schema/review";
@@ -164,6 +164,7 @@ const WriteReview = () => // wirte review
           <Col>
             <Form.Group controlId="controlSelect">
               <Form.Control
+                maxLength={LIMIT}
                 type="textbox"
                 placeholder="Do you have any pre-existing conditions?"
                 onChange={(e) => dispatch(CONDITIONS(e.target.value))} />
@@ -206,6 +207,7 @@ const WriteReview = () => // wirte review
 
         <Form.Group controlId="formBasicCheckbox" className="mt-4">
           <Form.Control
+            maxLength={LIMIT}
             type="textbox"
             placeholder="List any reactions you had after taking the vaccine"
             onChange={(e) => dispatch(REACTIONS(e.target.value))} />
@@ -219,6 +221,7 @@ const WriteReview = () => // wirte review
             as="textarea"
             rows={5}
             placeholder="Comments"
+            maxLength={COMMENT_LIMIT}
             onChange={(e) => dispatch(COMMENTS(e.target.value))} />
         </Form.Group>
         <div align="right">
