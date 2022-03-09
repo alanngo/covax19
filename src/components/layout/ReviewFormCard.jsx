@@ -3,7 +3,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Covexlogo from "../../assets/covex_logo.png";
 import Warning from '../../assets/warning.png'
-import { enumerate, hasSymptoms, beautifyDate } from '../../helper/functions';
+import { enumerate, beautifyDate } from '../../helper/functions';
 import { RenderIf } from "@alanngo/custom-components/dist"
 import "./reviewForm.css"
 
@@ -23,12 +23,12 @@ const ReviewFormCard = ({ data }) =>
                         <RenderIf condition={data.age}>🎂 {data.age} years old</RenderIf>
                     </li>
                     <li>
-                        <RenderIf condition={hasSymptoms(data.reactions)}>
-                            🤢 Preexisting Conditions: {(enumerate(data.conditions, `-`))}                        
+                        <RenderIf condition={enumerate(data.conditions, `-`).length > 0}>
+                            🤢 Preexisting Conditions: {enumerate(data.conditions, `-`)}
                         </RenderIf>
                     </li>
                     <li>
-                        <RenderIf condition={hasSymptoms(data.reactions)}>
+                        <RenderIf condition={enumerate(data.reactions).length > 0}>
                             🤒 Symptoms: {enumerate(data.reactions, `-`)}
                         </RenderIf>
                     </li>

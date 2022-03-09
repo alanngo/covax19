@@ -36,6 +36,7 @@ const ShowReviews = () => {
           symptoms, but you are not alone!
         </p>
         <CompaniesDropdown
+          namVaxes={patients.length}
           title={currentCompany}
           allSelect={resetCompanies}>
           {
@@ -47,7 +48,7 @@ const ShowReviews = () => {
                   setFiltered(patients.filter(p => p.company === company))
                   setCurrentCompany(company)
                 }}>
-                {company}
+                {company} ({patients.filter(p => p.company === company).length})
               </Dropdown.Item>
             ))
           }

@@ -1,20 +1,35 @@
 /**
- * 
+ * compare to strings ignore case
+ * @param {string} myString 
+ * @param {string} compareTo 
+ * @returns {boolean}
+ */
+ const ignoreCase = (myString, compareTo) => myString.toLowerCase() === compareTo.toLowerCase()
+ 
+/**
+ * enumerate symptoms and filter 'no symptoms' statements
  * @param {Array} arr 
  * @param {string} emoji 
  * @returns {JSX}
  */
-export const enumerate = (arr, emoji) => (arr ? arr.map(e => <div className="txtVal" key={e}>{`${emoji}  ${e} `}</div>) : "")
+export const enumerate = (arr=[], emoji) => (arr ? arr
+    .filter(e =>!ignoreCase(e, "n/a"))
+    .filter(e =>!ignoreCase(e, "none"))
+    .filter(e =>!ignoreCase(e, "no"))
+    .filter(e =>!ignoreCase(e, "nope"))
+    .filter(e =>!ignoreCase(e, "na"))
+    .filter(e =>!ignoreCase(e, ""))
+    .map(e => <div className="txtVal" key={e}>{`${emoji}  ${e} `}</div>) : "")
 
 /**
- * 
+ * valid date = any date after 2021 up to today
  * @param {Date} date 
  * @returns {boolean}
  */
 export const invalidDate = (date) => date.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0) || date.getFullYear() < 2021
 
 /**
- * 
+ * age cannot be negative
  * @param {number} age 
  * @returns {boolean}
  */
@@ -37,7 +52,7 @@ const getMonth = (monthNum) =>
     })[monthNum]
 
 /**
- * 
+ * changes date to proper string format
  * @param {Date} date 
  * @returns {String} yyyy-mm-dd
  */
@@ -51,33 +66,9 @@ export const beautifyDate = (date) => {
     return `${month} ${day} ${year}`
 }
 
-/**
- * 
- * @param {string} myString 
- * @param {string} compareTo 
- */
-const ignoreCase = (myString, compareTo) => myString.toLowerCase() === compareTo.toLowerCase()
-/**
- * 
- * @param {Array} array 
- * @returns {boolean}
- */
-export const hasSymptoms = (array) =>
-    array &&
-    array.length > 0
-    &&
-    !(
-        array.some(e => ignoreCase(e, "none")) ||
-        array.some(e => ignoreCase(e, "no")) ||
-        array.some(e => ignoreCase(e, "n/a")) ||
-        array.some(e => ignoreCase(e, "na")) ||
-        array.some(e => ignoreCase(e, "nope")) ||
-
-        array.some(e => e === "")
-    )
 
 /**
- * 
+ * convert to titlecase
  * @param {string} myString 
  * @returns {string}
  */
@@ -85,10 +76,10 @@ export const toTitle = (myString) => myString.replace(/\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
 
 /**
- * 
+ * update current state using spread operator
  * @param {Object} obj 
  * @param {string} key 
  * @param {any} value 
- * @returns 
+ * @returns {Object}
  */
 export const updateState = (obj, key, value) =>({ ...obj, [`${key}`]: value })

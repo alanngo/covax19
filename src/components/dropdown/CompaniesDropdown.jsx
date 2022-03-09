@@ -3,6 +3,7 @@ import { Dropdown } from "react-bootstrap"
 const CompaniesDropdown = 
 (
   {
+    namVaxes = 0,
     title = "Filter By Company",
     children = (<></>),
     allSelect = () => { }
@@ -17,7 +18,7 @@ const CompaniesDropdown =
     </Dropdown.Toggle>
 
     <Dropdown.Menu>
-      <Dropdown.Item onSelect={allSelect}>All</Dropdown.Item>
+      <Dropdown.Item onSelect={allSelect}>All ({namVaxes})</Dropdown.Item>
       <Dropdown.Divider />
       {children}
     </Dropdown.Menu>
